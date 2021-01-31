@@ -1,0 +1,2920 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0014)about:internet -->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <meta http-equiv="Content-Language" content="ja">
+    <meta http-equiv="Content-Script-Type" content="text/javascript">
+    <meta http-equiv="Content-Style-Type" content="text/css">
+    <meta name="format-detection" content="telephone=no">
+    <title>
+    
+    
+      Campusmate
+    
+    </title>
+
+
+    <script>
+      var waitingMessage = "お待ちください...";
+      var showBlockAlartMessage = "処理中です。しばらくお待ちください。";
+      var sessionExpirationAlertMessage = "まもなくセッションタイムアウトします。下のボタンからセッションタイムアウトを回避できます。";
+      var sessionContinuationButton = "セッションを継続する";
+      var sessionExpirationNotifyMessage = "セッションタイムアウトした恐れがあります。画面上の設定、若しくは入力内容があればお手元に控えた上で、再度ログインしてください。";
+      var closeAlertDialog = "閉じる";
+      var ajaxRequestError = "エラーが発生しました";
+      var addListenerError = "お使いのブラウザは対応していません。";
+      var noFoundResourceError = "存在しないファイルが指定されています。指定し直して下さい。";
+    </script>
+
+    <link rel="stylesheet" href="./Campusmate_files/timepicker.css" type="text/css" charset="utf-8">
+    <link rel="stylesheet" href="./Campusmate_files/jquery.ui.css" type="text/css" charset="utf-8"> 
+    <link rel="stylesheet" href="./Campusmate_files/common.css" type="text/css" media="screen" charset="utf-8">
+    <link rel="stylesheet" href="./Campusmate_files/theme.css" type="text/css" media="screen" charset="utf-8">
+    <!--<link rel="stylesheet" href="./css/design01/common_en.css" type="text/css" media="screen" charset="utf-8" />-->
+    <!--<link rel="stylesheet" href="./css/design01/theme_en.css" type="text/css" media="screen" charset="utf-8" />-->
+    <link rel="stylesheet" href="./Campusmate_files/common_print.css" type="text/css" media="print" charset="utf-8">
+    <link rel="stylesheet" href="./Campusmate_files/theme_print.css" type="text/css" media="print" charset="utf-8">
+    <!--<link rel="stylesheet" href="./css/design01/theme_print_en.css" type="text/css" media="print" charset="utf-8" />-->
+    <link rel="shortcut icon" href="https://alss-portal.gifu-u.ac.jp/campusweb/img/design01/favicon.ico">
+
+    <script language="JavaScript" type="text/JavaScript" src="./Campusmate_files/prototype.js"></script>
+    <script language="JavaScript" type="text/JavaScript" src="./Campusmate_files/effects.js"></script>
+    <script language="JavaScript" type="text/JavaScript" src="./Campusmate_files/main.js"></script>
+<!--[if IE]>
+    
+    <script language="JavaScript" type="text/JavaScript" src="./js/excanvas.js"></script>
+<![endif]-->
+
+    <script language="JavaScript" type="text/JavaScript" src="./Campusmate_files/jquery.js"></script>
+    <script type="text/javascript">jQuery.noConflict();var jq$ = jQuery;</script>
+    <script language="JavaScript" type="text/JavaScript" src="./Campusmate_files/jquery.ui.js"></script>
+    <script language="JavaScript" type="text/JavaScript" src="./Campusmate_files/date.js"></script>
+    <script language="JavaScript" type="text/JavaScript" src="./Campusmate_files/common.js"></script>
+    <script language="JavaScript" type="text/JavaScript" src="./Campusmate_files/theme.js"></script>
+    <script language="JavaScript" type="text/JavaScript" src="./Campusmate_files/jquery.ui.datepicker-ja.js"></script>
+    <script language="JavaScript" type="text/JavaScript" src="./Campusmate_files/jquery.timePicker.js"></script>
+    <script language="JavaScript" type="text/JavaScript" src="./Campusmate_files/jquery.numeric.js"></script>
+    <script language="JavaScript" type="text/JavaScript" src="./Campusmate_files/jquery.blockUI.js"></script>
+    <script language="JavaScript" type="text/JavaScript" src="./Campusmate_files/jquery.mousewheel.js"></script>
+    <script language="JavaScript" type="text/JavaScript" src="./Campusmate_files/main_jq.js"></script>
+    <script language="javascript" type="text/javascript">
+    <!--
+      restoreScreenState('', '', '');
+      
+      
+      if (true) {
+          monitoringSessionExpiration = startSessionExpirationMonitoring(7200, 300, 30);
+          monitoringSessionExpiration.initializeTimer();
+          window.addEventListener('resize', function(eve){
+              var resizeTimer = false;
+              if (resizeTimer !== false) {
+                  clearTimeout(resizeTimer);
+              }
+              resizeTimer = setTimeout(function() {
+                  monitoringSessionExpiration.resetPositioning();
+              }, 50);
+          }, false);
+      }
+    //-->
+    </script>
+
+  </head>
+
+<body>
+<div id="container">
+<div id="header">
+  
+  
+  <div id="head_top"></div>
+  <div id="head_left"></div>
+  <div id="head_right">
+    <div class="button">
+      
+      <input name="f_large" type="button" id="f_large">
+      <input name="f_middle" type="button" id="f_middle">
+      <input name="f_small" type="button" id="f_small">
+      
+        <span id="help_space"> </span>
+        <span id="logout_space"> </span>
+        
+      
+      
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div id="head_base"></div>
+  
+  <div id="top_menu">
+    <ul id="nav">
+
+      
+      
+        <li class="menu_end">
+        </li>
+      
+
+    </ul>
+    <br class="clear">
+  </div>
+</div>
+
+<div id="content">
+  <div id="login_inf_print">
+  <div class="top"></div>
+  <div class="mid">
+    
+    <ul class="user">
+    </ul>
+  
+  </div>
+  <div class="under"></div>
+</div><table cellpadding="0" cellspacing="0" summary="layout">
+    <tbody><tr>
+      
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+      
+
+
+
+
+
+
+
+<td id="main" style="font-size: 1em;">
+  
+    
+    <div id="title">
+      <h2>
+        講義から検索
+      </h2>
+    </div>
+    
+  
+
+
+
+
+
+
+<link href="./Campusmate_files/syllabus.css" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+
+<form name="sylbsActionForm" id="form" method="post" action="https://alss-portal.gifu-u.ac.jp/campusweb/slbsskgr.do">
+
+  <div class="contents_1">
+    <div class="function_bottom">
+      <table class="list" style="width:96%">
+        <tbody><tr class="button">
+          <td style="background:none">
+            <div style="text-align:left">
+            
+              
+              
+              
+              
+              
+              
+                <input type="button" id="slbsskgrBack" onclick="return exec(&#39;showSearchBack&#39;,this,null)" value="前画面へ戻る" class="return decorate">
+              
+            
+            </div>
+          </td>
+        </tr>
+      </tbody></table>
+    </div>
+  </div>
+
+  
+  <div class="caption">
+    <span class="h3 line3">講義一覧</span><br>
+  </div>
+
+  
+  <div class="caption">
+    <span class="image"></span>
+    <span class="h4 line4">シラバスを参照する講義名をクリックしてください。</span>
+  </div>
+
+  
+  <div class="contents_1">
+
+    <input type="hidden" name="buttonName" value="">
+<input type="hidden" name="timestamp" value="1611992032139">
+
+
+    
+      
+
+      
+
+      
+        　<br>
+        <table class="list">
+          <tbody><tr class="link">
+            <td colspan="5" style="text-align:right">
+              <div class="left"></div>
+              <div class="right">
+                
+                  
+                  
+                  
+                  
+                  
+                
+
+
+
+
+
+
+
+
+
+<script language="javascript">
+<!--
+var pagingStart = false;
+function doPaging(formName, buttonName, pageParamName, pageCount, maxCountParamName, maxCount) {
+    var userAgent = window.navigator.userAgent.toLowerCase();
+    var waitTime = 0;
+
+    // Edgeブラウザーの場合
+    if(userAgent.indexOf('edge') != -1){
+        waitTime = 300;
+    }
+
+    setTimeout(function(){
+        if (pagingStart == false) {
+            pagingStart = true;
+            $(pageParamName).value = pageCount;
+            $(maxCountParamName).value = maxCount;
+            $("selectButtonName").name = buttonName;
+            $(formName).submit();
+        }
+    }, waitTime);
+}
+//-->
+</script>
+
+
+
+
+
+
+ 
+      
+        <span>
+          1-100件表示/323件中
+        </span>
+ 
+        
+          <span>
+               
+
+                       
+
+            
+              
+                <b>1</b>
+              
+              
+            
+              
+                          
+                
+                  <a href="javascript:void(0);" onclick="doPaging(&#39;form&#39;,&#39;navigateKougiList&#39;,&#39;pageCount&#39;,&#39;2&#39;,&#39;maxCount&#39;,&#39;100&#39;);return false;">2</a>
+                
+                                
+              
+            
+              
+                          
+                
+                  <a href="javascript:void(0);" onclick="doPaging(&#39;form&#39;,&#39;navigateKougiList&#39;,&#39;pageCount&#39;,&#39;3&#39;,&#39;maxCount&#39;,&#39;100&#39;);return false;">3</a>
+                
+                                
+              
+            
+              
+                          
+                
+                  <a href="javascript:void(0);" onclick="doPaging(&#39;form&#39;,&#39;navigateKougiList&#39;,&#39;pageCount&#39;,&#39;4&#39;,&#39;maxCount&#39;,&#39;100&#39;);return false;">4</a>
+                
+                                
+              
+            
+
+            
+   
+                          
+              
+                <a href="javascript:void(0);" onclick="doPaging(&#39;form&#39;,&#39;navigateKougiList&#39;,&#39;pageCount&#39;,&#39;2&#39;,&#39;maxCount&#39;,&#39;100&#39;);return false;">次の100件&gt;&gt;</a>
+              
+              
+                          
+                       
+          </span>
+                
+       
+        
+          
+            <select name="maxDispListCount" onchange="doPaging(&#39;form&#39;,&#39;navigateKougiList&#39;,&#39;pageCount&#39;,&#39;&#39;,&#39;maxCount&#39;,this.value)" style="width:50px;"><option value="10">10</option>
+              
+                <option value="50">50</option>
+              
+                <option value="100" selected="selected">100</option></select>                
+          
+          
+          件表示
+        
+      
+      
+      
+      <input type="hidden" name="value(pageCount)" value="" id="pageCount">  
+      <input type="hidden" name="value(maxCount)" value="100" id="maxCount">  
+      <input type="hidden" value="dummy" name="dummy" id="selectButtonName">
+
+                <div class="image"></div>    
+              </div>
+            </td>
+          </tr>
+          <tr class="label">
+            <td style="white-space: nowrap;text-align:center" width="5%">No</td>
+            
+              <td style="white-space: nowrap;text-align:center" width="10%">講義コード</td>
+            
+            <td style="white-space: nowrap;text-align:center" width="25%">講義名</td>
+            
+            
+            
+              <td style="white-space: nowrap;text-align:center" width="20%">開講期間 曜日・時限</td>
+            
+            
+              <td style="white-space: nowrap;text-align:center" width="15%">担当教員</td>
+            
+          </tr>
+          
+            <tr class="column_odd" style="vertical-align:middle">
+              <td style="text-align:center">1</td>
+              
+                <td style="text-align:center">1ZCN62000</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZCN62000&amp;value(crclumcd)=">中国語I≪L1C1≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　火曜日　２時限</td>
+            
+
+            
+              <td>熊谷　暁子</td>
+            
+          </tr>
+          
+            <tr class="column_even" style="vertical-align:middle">
+              <td style="text-align:center">2</td>
+              
+                <td style="text-align:center">1ZCN62010</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZCN62010&amp;value(crclumcd)=">中国語I≪L1C2≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　火曜日　２時限</td>
+            
+
+            
+              <td>林　徳人</td>
+            
+          </tr>
+          
+            <tr class="column_odd" style="vertical-align:middle">
+              <td style="text-align:center">3</td>
+              
+                <td style="text-align:center">1ZCN62020</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZCN62020&amp;value(crclumcd)=">中国語I≪L1C3≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　火曜日　２時限</td>
+            
+
+            
+              <td>寺澤　知美</td>
+            
+          </tr>
+          
+            <tr class="column_even" style="vertical-align:middle">
+              <td style="text-align:center">4</td>
+              
+                <td style="text-align:center">1ZCN62030</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZCN62030&amp;value(crclumcd)=">中国語I≪R1C1≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　火曜日　２時限</td>
+            
+
+            
+              <td>橋本　永貢子</td>
+            
+          </tr>
+          
+            <tr class="column_odd" style="vertical-align:middle">
+              <td style="text-align:center">5</td>
+              
+                <td style="text-align:center">1ZCN62040</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZCN62040&amp;value(crclumcd)=">中国語I≪M1C1≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　火曜日　１時限</td>
+            
+
+            
+              <td>齊藤　正高</td>
+            
+          </tr>
+          
+            <tr class="column_even" style="vertical-align:middle">
+              <td style="text-align:center">6</td>
+              
+                <td style="text-align:center">1ZCN62050</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZCN62050&amp;value(crclumcd)=">中国語I≪N1C1≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　火曜日　２時限</td>
+            
+
+            
+              <td>齊藤　正高</td>
+            
+          </tr>
+          
+            <tr class="column_odd" style="vertical-align:middle">
+              <td style="text-align:center">7</td>
+              
+                <td style="text-align:center">1ZCN62060</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZCN62060&amp;value(crclumcd)=">中国語I≪T1C1≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　水曜日　１時限</td>
+            
+
+            
+              <td>林　徳人</td>
+            
+          </tr>
+          
+            <tr class="column_even" style="vertical-align:middle">
+              <td style="text-align:center">8</td>
+              
+                <td style="text-align:center">1ZCN62070</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZCN62070&amp;value(crclumcd)=">中国語I≪T1C2≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　水曜日　１時限</td>
+            
+
+            
+              <td>熊谷　暁子</td>
+            
+          </tr>
+          
+            <tr class="column_odd" style="vertical-align:middle">
+              <td style="text-align:center">9</td>
+              
+                <td style="text-align:center">1ZCN62080</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZCN62080&amp;value(crclumcd)=">中国語I≪T1C3≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　水曜日　１時限</td>
+            
+
+            
+              <td>齊藤　正高</td>
+            
+          </tr>
+          
+            <tr class="column_even" style="vertical-align:middle">
+              <td style="text-align:center">10</td>
+              
+                <td style="text-align:center">1ZCN62090</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZCN62090&amp;value(crclumcd)=">中国語I≪T1C4≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　水曜日　１時限</td>
+            
+
+            
+              <td>寺澤　知美</td>
+            
+          </tr>
+          
+            <tr class="column_odd" style="vertical-align:middle">
+              <td style="text-align:center">11</td>
+              
+                <td style="text-align:center">1ZCN62100</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZCN62100&amp;value(crclumcd)=">中国語I≪T1C5≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　水曜日　２時限</td>
+            
+
+            
+              <td>寺澤　知美</td>
+            
+          </tr>
+          
+            <tr class="column_even" style="vertical-align:middle">
+              <td style="text-align:center">12</td>
+              
+                <td style="text-align:center">1ZCN62110</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZCN62110&amp;value(crclumcd)=">中国語I≪T1C6≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　水曜日　２時限</td>
+            
+
+            
+              <td>齊藤　正高</td>
+            
+          </tr>
+          
+            <tr class="column_odd" style="vertical-align:middle">
+              <td style="text-align:center">13</td>
+              
+                <td style="text-align:center">1ZCN62120</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZCN62120&amp;value(crclumcd)=">中国語I≪T1C7≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　水曜日　２時限</td>
+            
+
+            
+              <td>林　徳人</td>
+            
+          </tr>
+          
+            <tr class="column_even" style="vertical-align:middle">
+              <td style="text-align:center">14</td>
+              
+                <td style="text-align:center">1ZCN62130</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZCN62130&amp;value(crclumcd)=">中国語I≪T1C8≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　水曜日　２時限</td>
+            
+
+            
+              <td>熊谷　暁子</td>
+            
+          </tr>
+          
+            <tr class="column_odd" style="vertical-align:middle">
+              <td style="text-align:center">15</td>
+              
+                <td style="text-align:center">1ZCN62140</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZCN62140&amp;value(crclumcd)=">中国語I≪A1C1≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　火曜日　１時限</td>
+            
+
+            
+              <td>熊谷　暁子</td>
+            
+          </tr>
+          
+            <tr class="column_even" style="vertical-align:middle">
+              <td style="text-align:center">16</td>
+              
+                <td style="text-align:center">1ZCN62150</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZCN62150&amp;value(crclumcd)=">中国語I≪A1C2≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　火曜日　１時限</td>
+            
+
+            
+              <td>寺澤　知美</td>
+            
+          </tr>
+          
+            <tr class="column_odd" style="vertical-align:middle">
+              <td style="text-align:center">17</td>
+              
+                <td style="text-align:center">1ZCN62530</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZCN62530&amp;value(crclumcd)=">中国語II≪R1C1≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　水曜日　１時限</td>
+            
+
+            
+              <td>松尾　幸忠</td>
+            
+          </tr>
+          
+            <tr class="column_even" style="vertical-align:middle">
+              <td style="text-align:center">18</td>
+              
+                <td style="text-align:center">1ZDE60000</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZDE60000&amp;value(crclumcd)=">ドイツ語I≪L1G1≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　火曜日　２時限</td>
+            
+
+            
+              <td>伊東　英</td>
+            
+          </tr>
+          
+            <tr class="column_odd" style="vertical-align:middle">
+              <td style="text-align:center">19</td>
+              
+                <td style="text-align:center">1ZDE60010</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZDE60010&amp;value(crclumcd)=">ドイツ語I≪L1G2≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　火曜日　２時限</td>
+            
+
+            
+              <td>伊藤　惟</td>
+            
+          </tr>
+          
+            <tr class="column_even" style="vertical-align:middle">
+              <td style="text-align:center">20</td>
+              
+                <td style="text-align:center">1ZDE60030</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZDE60030&amp;value(crclumcd)=">ドイツ語I≪R1G1≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　火曜日　２時限</td>
+            
+
+            
+              <td>松井　隆幸</td>
+            
+          </tr>
+          
+            <tr class="column_odd" style="vertical-align:middle">
+              <td style="text-align:center">21</td>
+              
+                <td style="text-align:center">1ZDE60040</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZDE60040&amp;value(crclumcd)=">ドイツ語I≪M1G1・N1G1・A1G1≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　火曜日　１時限</td>
+            
+
+            
+              <td>フォン　フラクシュタイン　ハラルド</td>
+            
+          </tr>
+          
+            <tr class="column_even" style="vertical-align:middle">
+              <td style="text-align:center">22</td>
+              
+                <td style="text-align:center">1ZDE60050</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZDE60050&amp;value(crclumcd)=">ドイツ語I≪M1G2・N1G2・A1G2≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　火曜日　１時限</td>
+            
+
+            
+              <td>伊東　英</td>
+            
+          </tr>
+          
+            <tr class="column_odd" style="vertical-align:middle">
+              <td style="text-align:center">23</td>
+              
+                <td style="text-align:center">1ZDE60051</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZDE60051&amp;value(crclumcd)=">ドイツ語I≪M1G3・N1G3・A1G3≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　火曜日　１時限</td>
+            
+
+            
+              <td>松井　隆幸</td>
+            
+          </tr>
+          
+            <tr class="column_even" style="vertical-align:middle">
+              <td style="text-align:center">24</td>
+              
+                <td style="text-align:center">1ZDE60052</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZDE60052&amp;value(crclumcd)=">ドイツ語I≪M1G4・N1G4・A1G4≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　火曜日　１時限</td>
+            
+
+            
+              <td>伊藤　惟</td>
+            
+          </tr>
+          
+            <tr class="column_odd" style="vertical-align:middle">
+              <td style="text-align:center">25</td>
+              
+                <td style="text-align:center">1ZDE60053</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZDE60053&amp;value(crclumcd)=">ドイツ語I≪M1G5・N1G5≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　火曜日　３時限</td>
+            
+
+            
+              <td>フォン　フラクシュタイン　ハラルド</td>
+            
+          </tr>
+          
+            <tr class="column_even" style="vertical-align:middle">
+              <td style="text-align:center">26</td>
+              
+                <td style="text-align:center">1ZDE60060</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZDE60060&amp;value(crclumcd)=">ドイツ語I≪T1G1≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　水曜日　１時限</td>
+            
+
+            
+              <td>フォン　フラクシュタイン　ハラルド</td>
+            
+          </tr>
+          
+            <tr class="column_odd" style="vertical-align:middle">
+              <td style="text-align:center">27</td>
+              
+                <td style="text-align:center">1ZDE60070</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZDE60070&amp;value(crclumcd)=">ドイツ語I≪T1G2≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　水曜日　１時限</td>
+            
+
+            
+              <td>山村　比鶴</td>
+            
+          </tr>
+          
+            <tr class="column_even" style="vertical-align:middle">
+              <td style="text-align:center">28</td>
+              
+                <td style="text-align:center">1ZDE60080</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZDE60080&amp;value(crclumcd)=">ドイツ語I≪T1G3≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　水曜日　１時限</td>
+            
+
+            
+              <td>伊藤　惟</td>
+            
+          </tr>
+          
+            <tr class="column_odd" style="vertical-align:middle">
+              <td style="text-align:center">29</td>
+              
+                <td style="text-align:center">1ZDE60090</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZDE60090&amp;value(crclumcd)=">ドイツ語I≪T1G4≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　水曜日　２時限</td>
+            
+
+            
+              <td>フォン　フラクシュタイン　ハラルド</td>
+            
+          </tr>
+          
+            <tr class="column_even" style="vertical-align:middle">
+              <td style="text-align:center">30</td>
+              
+                <td style="text-align:center">1ZDE60100</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZDE60100&amp;value(crclumcd)=">ドイツ語I≪T1G5≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　水曜日　２時限</td>
+            
+
+            
+              <td>山村　比鶴</td>
+            
+          </tr>
+          
+            <tr class="column_odd" style="vertical-align:middle">
+              <td style="text-align:center">31</td>
+              
+                <td style="text-align:center">1ZDE60110</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZDE60110&amp;value(crclumcd)=">ドイツ語I≪T1G6≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　水曜日　２時限</td>
+            
+
+            
+              <td>伊藤　惟</td>
+            
+          </tr>
+          
+            <tr class="column_even" style="vertical-align:middle">
+              <td style="text-align:center">32</td>
+              
+                <td style="text-align:center">1ZDE60150</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZDE60150&amp;value(crclumcd)=">ドイツ語I≪L1G（外国人教員）≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　火曜日　２時限</td>
+            
+
+            
+              <td>フオン　フラクシユタイン</td>
+            
+          </tr>
+          
+            <tr class="column_odd" style="vertical-align:middle">
+              <td style="text-align:center">33</td>
+              
+                <td style="text-align:center">1ZDE60160</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZDE60160&amp;value(crclumcd)=">ドイツ語I≪M1G・N1G・A1G（外国人教員）≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　火曜日　１時限</td>
+            
+
+            
+              <td>フオン　フラクシユタイン</td>
+            
+          </tr>
+          
+            <tr class="column_even" style="vertical-align:middle">
+              <td style="text-align:center">34</td>
+              
+                <td style="text-align:center">1ZDE60170</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZDE60170&amp;value(crclumcd)=">ドイツ語I≪T1G（外国人教員）≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　水曜日　２時限</td>
+            
+
+            
+              <td>フオン　フラクシユタイン</td>
+            
+          </tr>
+          
+            <tr class="column_odd" style="vertical-align:middle">
+              <td style="text-align:center">35</td>
+              
+                <td style="text-align:center">1ZDE60180</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZDE60180&amp;value(crclumcd)=">ドイツ語I≪R1G（外国人教員）≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　火曜日　３時限</td>
+            
+
+            
+              <td>フオン　フラクシユタイン</td>
+            
+          </tr>
+          
+            <tr class="column_even" style="vertical-align:middle">
+              <td style="text-align:center">36</td>
+              
+                <td style="text-align:center">1ZDE60530</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZDE60530&amp;value(crclumcd)=">ドイツ語II≪R1G1≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　水曜日　１時限</td>
+            
+
+            
+              <td>洞澤　伸</td>
+            
+          </tr>
+          
+            <tr class="column_odd" style="vertical-align:middle">
+              <td style="text-align:center">37</td>
+              
+                <td style="text-align:center">1ZDE60680</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZDE60680&amp;value(crclumcd)=">ドイツ語II≪R1G（外国人教員）≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　水曜日　１時限</td>
+            
+
+            
+              <td>フオン　フラクシユタイン</td>
+            
+          </tr>
+          
+            <tr class="column_even" style="vertical-align:middle">
+              <td style="text-align:center">38</td>
+              
+                <td style="text-align:center">1ZEN50000</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZEN50000&amp;value(crclumcd)=">英語１≪L1E1≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　月曜日　１時限</td>
+            
+
+            
+              <td>島﨑　治子<br>ファンヘトホフ　オノ　ビクトール<br>オフォード　アンドリュー</td>
+            
+          </tr>
+          
+            <tr class="column_odd" style="vertical-align:middle">
+              <td style="text-align:center">39</td>
+              
+                <td style="text-align:center">1ZEN50010</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZEN50010&amp;value(crclumcd)=">英語１≪L1E2≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　月曜日　１時限</td>
+            
+
+            
+              <td>島﨑　治子<br>ファンヘトホフ　オノ　ビクトール<br>クラップ　ジェフリー</td>
+            
+          </tr>
+          
+            <tr class="column_even" style="vertical-align:middle">
+              <td style="text-align:center">40</td>
+              
+                <td style="text-align:center">1ZEN50020</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZEN50020&amp;value(crclumcd)=">英語１≪L1E3≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　月曜日　１時限</td>
+            
+
+            
+              <td>島﨑　治子<br>ファンヘトホフ　オノ　ビクトール</td>
+            
+          </tr>
+          
+            <tr class="column_odd" style="vertical-align:middle">
+              <td style="text-align:center">41</td>
+              
+                <td style="text-align:center">1ZEN50030</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZEN50030&amp;value(crclumcd)=">英語１≪L1E4≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　月曜日　１時限</td>
+            
+
+            
+              <td>ファンヘトホフ　オノ　ビクトール<br>島﨑　治子</td>
+            
+          </tr>
+          
+            <tr class="column_even" style="vertical-align:middle">
+              <td style="text-align:center">42</td>
+              
+                <td style="text-align:center">1ZEN50040</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZEN50040&amp;value(crclumcd)=">英語１≪L1E5≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　月曜日　１時限</td>
+            
+
+            
+              <td>島﨑　治子<br>ファンヘトホフ　オノ　ビクトール<br>川崎　睦</td>
+            
+          </tr>
+          
+            <tr class="column_odd" style="vertical-align:middle">
+              <td style="text-align:center">43</td>
+              
+                <td style="text-align:center">1ZEN50050</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZEN50050&amp;value(crclumcd)=">英語１≪L1E6≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　月曜日　２時限</td>
+            
+
+            
+              <td>仲　潔</td>
+            
+          </tr>
+          
+            <tr class="column_even" style="vertical-align:middle">
+              <td style="text-align:center">44</td>
+              
+                <td style="text-align:center">1ZEN50060</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZEN50060&amp;value(crclumcd)=">英語１≪L1E7≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　月曜日　２時限</td>
+            
+
+            
+              <td>島﨑　治子<br>ファンヘトホフ　オノ　ビクトール<br>オフォード　アンドリュー</td>
+            
+          </tr>
+          
+            <tr class="column_odd" style="vertical-align:middle">
+              <td style="text-align:center">45</td>
+              
+                <td style="text-align:center">1ZEN50070</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZEN50070&amp;value(crclumcd)=">英語１≪L1E8≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　月曜日　２時限</td>
+            
+
+            
+              <td>島﨑　治子<br>ファンヘトホフ　オノ　ビクトール<br>クラップ　ジェフリー</td>
+            
+          </tr>
+          
+            <tr class="column_even" style="vertical-align:middle">
+              <td style="text-align:center">46</td>
+              
+                <td style="text-align:center">1ZEN50080</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZEN50080&amp;value(crclumcd)=">英語１≪L1E9≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　月曜日　２時限</td>
+            
+
+            
+              <td>島﨑　治子<br>ファンヘトホフ　オノ　ビクトール</td>
+            
+          </tr>
+          
+            <tr class="column_odd" style="vertical-align:middle">
+              <td style="text-align:center">47</td>
+              
+                <td style="text-align:center">1ZEN50090</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZEN50090&amp;value(crclumcd)=">英語１≪R1E1≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　火曜日　１時限</td>
+            
+
+            
+              <td>島﨑　治子<br>ファンヘトホフ　オノ　ビクトール<br>パトリック　キャシディ</td>
+            
+          </tr>
+          
+            <tr class="column_even" style="vertical-align:middle">
+              <td style="text-align:center">48</td>
+              
+                <td style="text-align:center">1ZEN50100</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZEN50100&amp;value(crclumcd)=">英語１≪R1E2≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　火曜日　１時限</td>
+            
+
+            
+              <td>島﨑　治子<br>ファンヘトホフ　オノ　ビクトール<br>ギボン　ベンハナン</td>
+            
+          </tr>
+          
+            <tr class="column_odd" style="vertical-align:middle">
+              <td style="text-align:center">49</td>
+              
+                <td style="text-align:center">1ZEN50110</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZEN50110&amp;value(crclumcd)=">英語１≪R1E3≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　火曜日　１時限</td>
+            
+
+            
+              <td>島﨑　治子<br>ファンヘトホフ　オノ　ビクトール<br>シャーボーン　マイケル</td>
+            
+          </tr>
+          
+            <tr class="column_even" style="vertical-align:middle">
+              <td style="text-align:center">50</td>
+              
+                <td style="text-align:center">1ZEN50120</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZEN50120&amp;value(crclumcd)=">英語１≪R1E4≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　火曜日　１時限</td>
+            
+
+            
+              <td>島﨑　治子<br>ファンヘトホフ　オノ　ビクトール<br>デビッドソン　ジョン</td>
+            
+          </tr>
+          
+            <tr class="column_odd" style="vertical-align:middle">
+              <td style="text-align:center">51</td>
+              
+                <td style="text-align:center">1ZEN50130</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZEN50130&amp;value(crclumcd)=">英語１≪M1E1≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　月曜日　２時限</td>
+            
+
+            
+              <td>島﨑　治子<br>ファンヘトホフ　オノ　ビクトール<br>マクレーン　イアン　ベイリー</td>
+            
+          </tr>
+          
+            <tr class="column_even" style="vertical-align:middle">
+              <td style="text-align:center">52</td>
+              
+                <td style="text-align:center">1ZEN50140</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZEN50140&amp;value(crclumcd)=">英語１≪M1E2≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　月曜日　２時限</td>
+            
+
+            
+              <td>ファンヘトホフ　オノ　ビクトール<br>島﨑　治子</td>
+            
+          </tr>
+          
+            <tr class="column_odd" style="vertical-align:middle">
+              <td style="text-align:center">53</td>
+              
+                <td style="text-align:center">1ZEN50150</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZEN50150&amp;value(crclumcd)=">英語１≪M1E3≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　月曜日　２時限</td>
+            
+
+            
+              <td>島﨑　治子<br>ファンヘトホフ　オノ　ビクトール<br>シャーボーン　マイケル</td>
+            
+          </tr>
+          
+            <tr class="column_even" style="vertical-align:middle">
+              <td style="text-align:center">54</td>
+              
+                <td style="text-align:center">1ZEN50160</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZEN50160&amp;value(crclumcd)=">英語１≪M1E4≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　月曜日　２時限</td>
+            
+
+            
+              <td>島﨑　治子<br>ファンヘトホフ　オノ　ビクトール<br>川崎　睦</td>
+            
+          </tr>
+          
+            <tr class="column_odd" style="vertical-align:middle">
+              <td style="text-align:center">55</td>
+              
+                <td style="text-align:center">1ZEN50170</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZEN50170&amp;value(crclumcd)=">英語１≪N1E1≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　月曜日　２時限</td>
+            
+
+            
+              <td>島﨑　治子<br>ファンヘトホフ　オノ　ビクトール<br>楊　瑛玲</td>
+            
+          </tr>
+          
+            <tr class="column_even" style="vertical-align:middle">
+              <td style="text-align:center">56</td>
+              
+                <td style="text-align:center">1ZEN50180</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZEN50180&amp;value(crclumcd)=">英語１≪N1E2≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　月曜日　２時限</td>
+            
+
+            
+              <td>島﨑　治子<br>ファンヘトホフ　オノ　ビクトール<br>デビッドソン　ジョン</td>
+            
+          </tr>
+          
+            <tr class="column_odd" style="vertical-align:middle">
+              <td style="text-align:center">57</td>
+              
+                <td style="text-align:center">1ZEN50190</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZEN50190&amp;value(crclumcd)=">英語１≪N1E3≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　月曜日　２時限</td>
+            
+
+            
+              <td>島﨑　治子<br>ファンヘトホフ　オノ　ビクトール<br>グレッグ　リチャード　トレバ</td>
+            
+          </tr>
+          
+            <tr class="column_even" style="vertical-align:middle">
+              <td style="text-align:center">58</td>
+              
+                <td style="text-align:center">1ZEN50200</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZEN50200&amp;value(crclumcd)=">英語１≪T1E1≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　火曜日　１時限</td>
+            
+
+            
+              <td>島﨑　治子<br>ファンヘトホフ　オノ　ビクトール<br>オフォード　アンドリュー</td>
+            
+          </tr>
+          
+            <tr class="column_odd" style="vertical-align:middle">
+              <td style="text-align:center">59</td>
+              
+                <td style="text-align:center">1ZEN50210</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZEN50210&amp;value(crclumcd)=">英語１≪T1E2≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　火曜日　１時限</td>
+            
+
+            
+              <td>島﨑　治子<br>ファンヘトホフ　オノ　ビクトール<br>クラップ　ジェフリー</td>
+            
+          </tr>
+          
+            <tr class="column_even" style="vertical-align:middle">
+              <td style="text-align:center">60</td>
+              
+                <td style="text-align:center">1ZEN50220</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZEN50220&amp;value(crclumcd)=">英語１≪T1E3≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　火曜日　１時限</td>
+            
+
+            
+              <td>島﨑　治子<br>ファンヘトホフ　オノ　ビクトール<br>楊　瑛玲</td>
+            
+          </tr>
+          
+            <tr class="column_odd" style="vertical-align:middle">
+              <td style="text-align:center">61</td>
+              
+                <td style="text-align:center">1ZEN50230</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZEN50230&amp;value(crclumcd)=">英語１≪T1E4≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　火曜日　１時限</td>
+            
+
+            
+              <td>島﨑　治子<br>ファンヘトホフ　オノ　ビクトール</td>
+            
+          </tr>
+          
+            <tr class="column_even" style="vertical-align:middle">
+              <td style="text-align:center">62</td>
+              
+                <td style="text-align:center">1ZEN50240</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZEN50240&amp;value(crclumcd)=">英語１≪T1E5≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　火曜日　１時限</td>
+            
+
+            
+              <td>ファンヘトホフ　オノ　ビクトール<br>島﨑　治子</td>
+            
+          </tr>
+          
+            <tr class="column_odd" style="vertical-align:middle">
+              <td style="text-align:center">63</td>
+              
+                <td style="text-align:center">1ZEN50250</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZEN50250&amp;value(crclumcd)=">英語１≪T1E6≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　火曜日　１時限</td>
+            
+
+            
+              <td>島﨑　治子<br>ファンヘトホフ　オノ　ビクトール<br>川崎　睦</td>
+            
+          </tr>
+          
+            <tr class="column_even" style="vertical-align:middle">
+              <td style="text-align:center">64</td>
+              
+                <td style="text-align:center">1ZEN50260</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZEN50260&amp;value(crclumcd)=">英語１≪T1E7≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　火曜日　１時限</td>
+            
+
+            
+              <td>島﨑　治子<br>ファンヘトホフ　オノ　ビクトール<br>グレッグ　リチャード　トレバ</td>
+            
+          </tr>
+          
+            <tr class="column_odd" style="vertical-align:middle">
+              <td style="text-align:center">65</td>
+              
+                <td style="text-align:center">1ZEN50270</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZEN50270&amp;value(crclumcd)=">英語１≪T1E8≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　火曜日　１時限</td>
+            
+
+            
+              <td>島﨑　治子<br>ファンヘトホフ　オノ　ビクトール<br>マクレーン　イアン　ベイリー</td>
+            
+          </tr>
+          
+            <tr class="column_even" style="vertical-align:middle">
+              <td style="text-align:center">66</td>
+              
+                <td style="text-align:center">1ZEN50280</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZEN50280&amp;value(crclumcd)=">英語１≪T1E9≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　火曜日　２時限</td>
+            
+
+            
+              <td>島﨑　治子<br>ファンヘトホフ　オノ　ビクトール</td>
+            
+          </tr>
+          
+            <tr class="column_odd" style="vertical-align:middle">
+              <td style="text-align:center">67</td>
+              
+                <td style="text-align:center">1ZEN50290</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZEN50290&amp;value(crclumcd)=">英語１≪T1E10≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　火曜日　２時限</td>
+            
+
+            
+              <td>島﨑　治子<br>ファンヘトホフ　オノ　ビクトール<br>パトリック　キャシディ</td>
+            
+          </tr>
+          
+            <tr class="column_even" style="vertical-align:middle">
+              <td style="text-align:center">68</td>
+              
+                <td style="text-align:center">1ZEN50300</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZEN50300&amp;value(crclumcd)=">英語１≪T1E11≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　火曜日　２時限</td>
+            
+
+            
+              <td>島﨑　治子<br>ファンヘトホフ　オノ　ビクトール<br>シャーボーン　マイケル</td>
+            
+          </tr>
+          
+            <tr class="column_odd" style="vertical-align:middle">
+              <td style="text-align:center">69</td>
+              
+                <td style="text-align:center">1ZEN50310</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZEN50310&amp;value(crclumcd)=">英語１≪T1E12≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　火曜日　２時限</td>
+            
+
+            
+              <td>島﨑　治子<br>ファンヘトホフ　オノ　ビクトール<br>デビッドソン　ジョン</td>
+            
+          </tr>
+          
+            <tr class="column_even" style="vertical-align:middle">
+              <td style="text-align:center">70</td>
+              
+                <td style="text-align:center">1ZEN50320</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZEN50320&amp;value(crclumcd)=">英語１≪T1E13≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　火曜日　２時限</td>
+            
+
+            
+              <td>島﨑　治子<br>ファンヘトホフ　オノ　ビクトール<br>オフォード　アンドリュー</td>
+            
+          </tr>
+          
+            <tr class="column_odd" style="vertical-align:middle">
+              <td style="text-align:center">71</td>
+              
+                <td style="text-align:center">1ZEN50330</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZEN50330&amp;value(crclumcd)=">英語１≪T1E14≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　火曜日　２時限</td>
+            
+
+            
+              <td>島﨑　治子<br>ファンヘトホフ　オノ　ビクトール<br>クラップ　ジェフリー</td>
+            
+          </tr>
+          
+            <tr class="column_even" style="vertical-align:middle">
+              <td style="text-align:center">72</td>
+              
+                <td style="text-align:center">1ZEN50340</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZEN50340&amp;value(crclumcd)=">英語１≪T1E15≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　火曜日　２時限</td>
+            
+
+            
+              <td>島﨑　治子<br>ファンヘトホフ　オノ　ビクトール<br>楊　瑛玲</td>
+            
+          </tr>
+          
+            <tr class="column_odd" style="vertical-align:middle">
+              <td style="text-align:center">73</td>
+              
+                <td style="text-align:center">1ZEN50350</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZEN50350&amp;value(crclumcd)=">英語１≪T1E16≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　火曜日　２時限</td>
+            
+
+            
+              <td>島﨑　治子<br>ファンヘトホフ　オノ　ビクトール<br>ギボン　ベンハナン</td>
+            
+          </tr>
+          
+            <tr class="column_even" style="vertical-align:middle">
+              <td style="text-align:center">74</td>
+              
+                <td style="text-align:center">1ZEN50380</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZEN50380&amp;value(crclumcd)=">英語１≪A1E1≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　水曜日　２時限</td>
+            
+
+            
+              <td>島﨑　治子<br>ファンヘトホフ　オノ　ビクトール<br>デビッドソン　ジョン</td>
+            
+          </tr>
+          
+            <tr class="column_odd" style="vertical-align:middle">
+              <td style="text-align:center">75</td>
+              
+                <td style="text-align:center">1ZEN50390</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZEN50390&amp;value(crclumcd)=">英語１≪A1E2≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　水曜日　２時限</td>
+            
+
+            
+              <td>島﨑　治子<br>ファンヘトホフ　オノ　ビクトール<br>ギボン　ベンハナン</td>
+            
+          </tr>
+          
+            <tr class="column_even" style="vertical-align:middle">
+              <td style="text-align:center">76</td>
+              
+                <td style="text-align:center">1ZEN50400</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZEN50400&amp;value(crclumcd)=">英語１≪A1E3≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　水曜日　２時限</td>
+            
+
+            
+              <td>島﨑　治子<br>ファンヘトホフ　オノ　ビクトール<br>オフォード　アンドリュー</td>
+            
+          </tr>
+          
+            <tr class="column_odd" style="vertical-align:middle">
+              <td style="text-align:center">77</td>
+              
+                <td style="text-align:center">1ZEN50410</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZEN50410&amp;value(crclumcd)=">英語１≪A1E4≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　水曜日　２時限</td>
+            
+
+            
+              <td>島﨑　治子<br>ファンヘトホフ　オノ　ビクトール<br>パトリック　キャシディ</td>
+            
+          </tr>
+          
+            <tr class="column_even" style="vertical-align:middle">
+              <td style="text-align:center">78</td>
+              
+                <td style="text-align:center">1ZEN50420</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZEN50420&amp;value(crclumcd)=">英語１≪A1E5≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　水曜日　２時限</td>
+            
+
+            
+              <td>島﨑　治子<br>ファンヘトホフ　オノ　ビクトール<br>クラップ　ジェフリー</td>
+            
+          </tr>
+          
+            <tr class="column_odd" style="vertical-align:middle">
+              <td style="text-align:center">79</td>
+              
+                <td style="text-align:center">1ZEN50430</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZEN50430&amp;value(crclumcd)=">英語１≪A1E6≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　水曜日　２時限</td>
+            
+
+            
+              <td>島﨑　治子<br>ファンヘトホフ　オノ　ビクトール<br>グレッグ　リチャード　トレバ</td>
+            
+          </tr>
+          
+            <tr class="column_even" style="vertical-align:middle">
+              <td style="text-align:center">80</td>
+              
+                <td style="text-align:center">1ZEN51000</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZEN51000&amp;value(crclumcd)=">英語２≪L1E1≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　水曜日　１時限</td>
+            
+
+            
+              <td>島﨑　治子<br>ファンヘトホフ　オノ　ビクトール<br>クラップ　ジェフリー</td>
+            
+          </tr>
+          
+            <tr class="column_odd" style="vertical-align:middle">
+              <td style="text-align:center">81</td>
+              
+                <td style="text-align:center">1ZEN51010</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZEN51010&amp;value(crclumcd)=">英語２≪L1E2≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　水曜日　１時限</td>
+            
+
+            
+              <td>島﨑　治子<br>ファンヘトホフ　オノ　ビクトール<br>オフォード　アンドリュー</td>
+            
+          </tr>
+          
+            <tr class="column_even" style="vertical-align:middle">
+              <td style="text-align:center">82</td>
+              
+                <td style="text-align:center">1ZEN51020</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZEN51020&amp;value(crclumcd)=">英語２≪L1E3≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　水曜日　１時限</td>
+            
+
+            
+              <td>島﨑　治子<br>ファンヘトホフ　オノ　ビクトール<br>グレッグ　リチャード　トレバ</td>
+            
+          </tr>
+          
+            <tr class="column_odd" style="vertical-align:middle">
+              <td style="text-align:center">83</td>
+              
+                <td style="text-align:center">1ZEN51030</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZEN51030&amp;value(crclumcd)=">英語２≪L1E4≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　水曜日　１時限</td>
+            
+
+            
+              <td>島﨑　治子<br>ファンヘトホフ　オノ　ビクトール<br>川崎　睦</td>
+            
+          </tr>
+          
+            <tr class="column_even" style="vertical-align:middle">
+              <td style="text-align:center">84</td>
+              
+                <td style="text-align:center">1ZEN51040</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZEN51040&amp;value(crclumcd)=">英語２≪L1E5≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　水曜日　１時限</td>
+            
+
+            
+              <td>島﨑　治子<br>ファンヘトホフ　オノ　ビクトール<br>デビッドソン　ジョン</td>
+            
+          </tr>
+          
+            <tr class="column_odd" style="vertical-align:middle">
+              <td style="text-align:center">85</td>
+              
+                <td style="text-align:center">1ZEN51050</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZEN51050&amp;value(crclumcd)=">英語２≪L1E6≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　水曜日　１時限</td>
+            
+
+            
+              <td>飯田　泰弘</td>
+            
+          </tr>
+          
+            <tr class="column_even" style="vertical-align:middle">
+              <td style="text-align:center">86</td>
+              
+                <td style="text-align:center">1ZEN51060</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZEN51060&amp;value(crclumcd)=">英語２≪L1E7≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　水曜日　１時限</td>
+            
+
+            
+              <td>島﨑　治子<br>ファンヘトホフ　オノ　ビクトール<br>シャーボーン　マイケル</td>
+            
+          </tr>
+          
+            <tr class="column_odd" style="vertical-align:middle">
+              <td style="text-align:center">87</td>
+              
+                <td style="text-align:center">1ZEN51070</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZEN51070&amp;value(crclumcd)=">英語２≪L1E8≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　水曜日　１時限</td>
+            
+
+            
+              <td>島﨑　治子<br>ファンヘトホフ　オノ　ビクトール<br>ギボン　ベンハナン</td>
+            
+          </tr>
+          
+            <tr class="column_even" style="vertical-align:middle">
+              <td style="text-align:center">88</td>
+              
+                <td style="text-align:center">1ZEN51080</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZEN51080&amp;value(crclumcd)=">英語２≪L1E9≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　水曜日　１時限</td>
+            
+
+            
+              <td>島﨑　治子<br>ファンヘトホフ　オノ　ビクトール<br>マクレーン　イアン　ベイリー</td>
+            
+          </tr>
+          
+            <tr class="column_odd" style="vertical-align:middle">
+              <td style="text-align:center">89</td>
+              
+                <td style="text-align:center">1ZEN51090</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZEN51090&amp;value(crclumcd)=">英語２≪R1E1≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　水曜日　２時限</td>
+            
+
+            
+              <td>島﨑　治子<br>ファンヘトホフ　オノ　ビクトール<br>川崎　睦</td>
+            
+          </tr>
+          
+            <tr class="column_even" style="vertical-align:middle">
+              <td style="text-align:center">90</td>
+              
+                <td style="text-align:center">1ZEN51100</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZEN51100&amp;value(crclumcd)=">英語２≪R1E2≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　水曜日　２時限</td>
+            
+
+            
+              <td>内田　勝</td>
+            
+          </tr>
+          
+            <tr class="column_odd" style="vertical-align:middle">
+              <td style="text-align:center">91</td>
+              
+                <td style="text-align:center">1ZEN51110</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZEN51110&amp;value(crclumcd)=">英語２≪R1E3≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　水曜日　２時限</td>
+            
+
+            
+              <td>内海　智仁</td>
+            
+          </tr>
+          
+            <tr class="column_even" style="vertical-align:middle">
+              <td style="text-align:center">92</td>
+              
+                <td style="text-align:center">1ZEN51120</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZEN51120&amp;value(crclumcd)=">英語２≪R1E4≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　水曜日　２時限</td>
+            
+
+            
+              <td>島﨑　治子<br>ファンヘトホフ　オノ　ビクトール<br>シャーボーン　マイケル</td>
+            
+          </tr>
+          
+            <tr class="column_odd" style="vertical-align:middle">
+              <td style="text-align:center">93</td>
+              
+                <td style="text-align:center">1ZEN51130</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZEN51130&amp;value(crclumcd)=">英語２≪M1E1≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　水曜日　３時限</td>
+            
+
+            
+              <td>島﨑　治子<br>ファンヘトホフ　オノ　ビクトール</td>
+            
+          </tr>
+          
+            <tr class="column_even" style="vertical-align:middle">
+              <td style="text-align:center">94</td>
+              
+                <td style="text-align:center">1ZEN51140</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZEN51140&amp;value(crclumcd)=">英語２≪M1E2≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　水曜日　３時限</td>
+            
+
+            
+              <td>島﨑　治子<br>ファンヘトホフ　オノ　ビクトール<br>マクレーン　イアン　ベイリー</td>
+            
+          </tr>
+          
+            <tr class="column_odd" style="vertical-align:middle">
+              <td style="text-align:center">95</td>
+              
+                <td style="text-align:center">1ZEN51150</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZEN51150&amp;value(crclumcd)=">英語２≪M1E3≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　水曜日　４時限</td>
+            
+
+            
+              <td>島﨑　治子<br>ファンヘトホフ　オノ　ビクトール<br>マクレーン　イアン　ベイリー</td>
+            
+          </tr>
+          
+            <tr class="column_even" style="vertical-align:middle">
+              <td style="text-align:center">96</td>
+              
+                <td style="text-align:center">1ZEN51160</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZEN51160&amp;value(crclumcd)=">英語２≪M1E4≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　水曜日　４時限</td>
+            
+
+            
+              <td>ファンヘトホフ　オノ　ビクトール<br>島﨑　治子</td>
+            
+          </tr>
+          
+            <tr class="column_odd" style="vertical-align:middle">
+              <td style="text-align:center">97</td>
+              
+                <td style="text-align:center">1ZEN52180</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZEN52180&amp;value(crclumcd)=">英語３≪N2E1≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　水曜日　１時限</td>
+            
+
+            
+              <td>島﨑　治子<br>ファンヘトホフ　オノ　ビクトール</td>
+            
+          </tr>
+          
+            <tr class="column_even" style="vertical-align:middle">
+              <td style="text-align:center">98</td>
+              
+                <td style="text-align:center">1ZEN52190</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZEN52190&amp;value(crclumcd)=">英語３≪N2E2≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　水曜日　１時限</td>
+            
+
+            
+              <td>島﨑　治子<br>ファンヘトホフ　オノ　ビクトール<br>パトリック　キャシディ</td>
+            
+          </tr>
+          
+            <tr class="column_odd" style="vertical-align:middle">
+              <td style="text-align:center">99</td>
+              
+                <td style="text-align:center">1ZEN52200</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZEN52200&amp;value(crclumcd)=">英語３≪N2E3≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　水曜日　１時限</td>
+            
+
+            
+              <td>ファンヘトホフ　オノ　ビクトール<br>島﨑　治子</td>
+            
+          </tr>
+          
+            <tr class="column_even" style="vertical-align:middle">
+              <td style="text-align:center">100</td>
+              
+                <td style="text-align:center">1ZEN52210</td>
+              
+              <td>
+                
+                <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&amp;value(semekikn)=1&amp;value(kougicd)=1ZEN52210&amp;value(crclumcd)=">英語３≪T2E1≫</a>
+            </td>
+
+            
+
+            
+
+            
+              <td>前学期　木曜日　４時限</td>
+            
+
+            
+              <td>島﨑　治子<br>ファンヘトホフ　オノ　ビクトール</td>
+            
+          </tr>
+          
+
+          <tr class="link">
+            <td colspan="5" style="background:none">
+              <div class="left"></div>
+              <div class="right">
+                
+                  
+                  
+                  
+                  
+                  
+                
+
+
+
+
+
+
+
+
+
+<script language="javascript">
+<!--
+var pagingStart = false;
+function doPaging(formName, buttonName, pageParamName, pageCount, maxCountParamName, maxCount) {
+    var userAgent = window.navigator.userAgent.toLowerCase();
+    var waitTime = 0;
+
+    // Edgeブラウザーの場合
+    if(userAgent.indexOf('edge') != -1){
+        waitTime = 300;
+    }
+
+    setTimeout(function(){
+        if (pagingStart == false) {
+            pagingStart = true;
+            $(pageParamName).value = pageCount;
+            $(maxCountParamName).value = maxCount;
+            $("selectButtonName").name = buttonName;
+            $(formName).submit();
+        }
+    }, waitTime);
+}
+//-->
+</script>
+
+
+
+
+
+
+ 
+      
+        <span>
+          1-100件表示/323件中
+        </span>
+ 
+        
+          <span>
+               
+
+                       
+
+            
+              
+                <b>1</b>
+              
+              
+            
+              
+                          
+                
+                  <a href="javascript:void(0);" onclick="doPaging(&#39;form&#39;,&#39;navigateKougiList&#39;,&#39;pageCount&#39;,&#39;2&#39;,&#39;maxCount&#39;,&#39;100&#39;);return false;">2</a>
+                
+                                
+              
+            
+              
+                          
+                
+                  <a href="javascript:void(0);" onclick="doPaging(&#39;form&#39;,&#39;navigateKougiList&#39;,&#39;pageCount&#39;,&#39;3&#39;,&#39;maxCount&#39;,&#39;100&#39;);return false;">3</a>
+                
+                                
+              
+            
+              
+                          
+                
+                  <a href="javascript:void(0);" onclick="doPaging(&#39;form&#39;,&#39;navigateKougiList&#39;,&#39;pageCount&#39;,&#39;4&#39;,&#39;maxCount&#39;,&#39;100&#39;);return false;">4</a>
+                
+                                
+              
+            
+
+            
+   
+                          
+              
+                <a href="javascript:void(0);" onclick="doPaging(&#39;form&#39;,&#39;navigateKougiList&#39;,&#39;pageCount&#39;,&#39;2&#39;,&#39;maxCount&#39;,&#39;100&#39;);return false;">次の100件&gt;&gt;</a>
+              
+              
+                          
+                       
+          </span>
+                
+       
+        
+          
+            <select name="maxDispListCount" onchange="doPaging(&#39;form&#39;,&#39;navigateKougiList&#39;,&#39;pageCount&#39;,&#39;&#39;,&#39;maxCount&#39;,this.value)" style="width:50px;"><option value="10">10</option>
+              
+                <option value="50">50</option>
+              
+                <option value="100" selected="selected">100</option></select>                
+          
+          
+          件表示
+        
+      
+      
+      
+      <input type="hidden" name="value(pageCount)" value="" id="pageCount">  
+      <input type="hidden" name="value(maxCount)" value="100" id="maxCount">  
+      <input type="hidden" value="dummy" name="dummy" id="selectButtonName">
+
+                <div class="image"></div>    
+              </div>
+            </td>
+          </tr>
+        </tbody></table>
+
+        　<br>
+      
+    
+
+    <div class="function_bottom">
+      <table class="list" style="width:96%">
+        <tbody><tr class="button">
+          <td style="background:none">
+            <div style="text-align:left">
+              
+                
+                
+                
+                
+                
+                
+                  <input type="button" id="slbsskgrBack" onclick="return exec(&#39;showSearchBack&#39;,this,null)" value="前画面へ戻る" class="return decorate">
+                
+              
+            </div>
+          </td>
+        </tr>
+      </tbody></table>
+    </div>
+  </div>
+</form>
+
+</td>
+      
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+<!--
+  function langswitching() {
+	if (confirm("日英表示を切り替えてよろしいですか？Do you switch the Japanese-English display?")){
+		return false;
+	}
+	return true;
+  }
+
+//-->
+</script>
+
+
+<td id="sub1" style="height: 7520px;">
+  <div id="navigation">
+   
+   
+      
+      
+   
+
+  
+  
+  </div>
+  <div id="dummy"></div>
+  <br class="clear">
+</td>
+
+    </tr>
+  </tbody></table>
+</div>
+
+<p id="pageTopButton" style="display: none;">
+  <a href="https://alss-portal.gifu-u.ac.jp/campusweb/slbsskgr.do#wrap" id="pageTopLink">PAGE TOP</a>
+</p>
+
+
+
+
+
+<script type="text/javascript">
+
+jQuery(function(){
+ // target = document.getElementById("copyright");
+ // target.innerHTML = "Copyright FUJITSU LIMITED 2005-" + new Date().getFullYear();
+});
+
+</script>
+
+  <noscript><c:out value="JavaScriptを使用できる環境でご利用ください。" /></noscript>
+  <div id="footer">
+    
+  </div>
+
+</div>
+
+
+
+</body></html>
