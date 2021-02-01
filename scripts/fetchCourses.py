@@ -5,6 +5,10 @@ import pandas as pd
 import pymongo
 import mongoDB_key
 
+
+dict_list = []
+
+
 # Connect To MongoDB
 def connectToMongoDB(dict_list):
     # -- Create Mongo DB
@@ -26,18 +30,20 @@ def writeOutputFile(output_text):
 def openFile():
     with open('outputFile2.txt', 'rt', encoding='utf-8') as f:
         read_data = list(f)
-    addListDictonary(read_data=read_data, number=number)
     print(read_data)
+    addListDictonary(read_data=read_data)
+
 
 # Add List Dictionary
-def addListDictonary(read_data, number):
-    local_number = 0
+def addListDictonary(read_data):
+    local_number = 1
     for i in range(len(read_data)):
         search_number = "{0}\n".format(local_number)
 
         if read_data[i] == search_number:
             dict = {}
-            dict["_id"] = number
+            print("id -> {0}".format(local_number))
+            dict["_id"] = local_number
             dict["講義コード"] = read_data[i+1].replace('\n', '')
             dict["講義名"] = read_data[i+3].replace('\n', '')
             dict["開講時期"] = read_data[i+5].replace('\n', '')
@@ -45,10 +51,8 @@ def addListDictonary(read_data, number):
 
             dict_list.append(dict)
             local_number += 1
-            number += 1
 
-dict_list = []
-number = 1
+
 
 # TODO: Open Campusmate1.html, Campusmate2.html, Campusmate3.html, Campusmate4.html
 for i in range(4):
@@ -62,12 +66,16 @@ for i in range(4):
 
     openFile()
 
+print("Not Connect to MongoDB")
 
-connectToMongoDB(dict_list=dict_list)
+count = 1
+for dict in dict_list:
+    dict["_id"] = count
+    count += 1
+
 print(dict_list)
 
-
-
+connectToMongoDB(dict_list=dict_list)
 
 
 
