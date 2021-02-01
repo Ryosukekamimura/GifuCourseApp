@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 import csv
 import pandas as pd
 import pymongo
-import mongoDB_key
+import MongoDBKey
 
 
 dict_list = []
@@ -11,11 +11,13 @@ dict_list = []
 
 # Connect To MongoDB
 def connectToMongoDB(dict_list):
+
+    dbname = "mydatabase"
     # -- Create Mongo DB
-    key = mongoDB_key.MongoDBKey().mongo_db_key()
+    key = MongoDBKey.MongoDBKey().mongoDB_key(dbname)
     myclient = pymongo.MongoClient(key)
-    mydb = myclient["mydatabase"]
-    mycol = mydb["gifu_courses"]
+    mydb = myclient[dbname]
+    mycol = mydb["courses"]
     x = mycol.insert_many(dict_list)
     print(x)
 
