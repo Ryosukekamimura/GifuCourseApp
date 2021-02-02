@@ -4,10 +4,9 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mongoose = require('mongoose')
-
+var cors = require('cors')
 // routers
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
 var coursesRouter = require('./routes/courses');
 
 // express instance
@@ -29,11 +28,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(cors())
 
 // setting router
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/courses', coursesRouter);
+
+// course list
+app.use('/api/v1/courses', coursesRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
