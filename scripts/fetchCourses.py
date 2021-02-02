@@ -45,11 +45,11 @@ def addListDictonary(read_data):
         if read_data[i] == search_number:
             dict = {}
             print("id -> {0}".format(local_number))
-            dict["_id"] = local_number
-            dict["講義コード"] = read_data[i+1].replace('\n', '')
-            dict["講義名"] = read_data[i+3].replace('\n', '')
-            dict["開講時期"] = read_data[i+5].replace('\n', '')
-            dict["担当教員"] = read_data[i+6].replace('\n', '')
+            dict["id"] = local_number
+            dict["lecture_code"] = read_data[i+1].replace('\n', '')
+            dict["lecture_name"] = read_data[i+3].replace('\n', '')
+            dict["lecture_season"] = read_data[i+5].replace('\n', '')
+            dict["teacher_name"] = read_data[i+6].replace('\n', '')
 
             dict_list.append(dict)
             local_number += 1
@@ -58,7 +58,7 @@ def addListDictonary(read_data):
 
 # TODO: Open Campusmate1.html, Campusmate2.html, Campusmate3.html, Campusmate4.html
 for i in range(4):
-    with open('../scripts/cources/Campusmate' + str(i) + '.html', encoding='utf-8') as f:
+    with open('../scripts/courses/Campusmate' + str(i) + '.html', encoding='utf-8') as f:
         html = f.read()
     soup = BeautifulSoup(html, 'html.parser')
 
@@ -72,7 +72,7 @@ print("Not Connect to MongoDB")
 
 count = 1
 for dict in dict_list:
-    dict["_id"] = count
+    dict["id"] = count
     count += 1
 
 print(dict_list)
