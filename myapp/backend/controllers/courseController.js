@@ -7,6 +7,6 @@ exports.course_list = function(req, res, next) {
         .find(function(err, courses){
             if (err) { return next(err) }
             // Success
-            res.render('course_list', { title: 'Course List', course_list: courses})
+            res.render('course_list', { title: '岐阜大学　全共　クチコミ.com', course_list: courses})
         })
 }
