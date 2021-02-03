@@ -58,7 +58,7 @@ def addListDictonary(read_data):
 
 # TODO: Open Campusmate1.html, Campusmate2.html, Campusmate3.html, Campusmate4.html
 for i in range(4):
-    with open('../scripts/courses/Campusmate' + str(i) + '.html', encoding='utf-8') as f:
+    with open('../scripts/courses/Campusmate' + str(3-i) + '.html', encoding='utf-8') as f:
         html = f.read()
     soup = BeautifulSoup(html, 'html.parser')
 
@@ -73,6 +73,8 @@ print("Not Connect to MongoDB")
 count = 1
 for dict in dict_list:
     dict["id"] = count
+    dict["plus"] = 0
+    dict["minus"] = 0
     count += 1
 
 print(dict_list)
