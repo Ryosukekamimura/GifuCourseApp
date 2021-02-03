@@ -54,7 +54,7 @@
     },
     mounted() {
       axios.get('http://localhost:8000/api/v1/courses')
-      .then(response => {
+        .then(response => {
         console.log('Success to Fetch API')
         this.courses = response.data
       })
