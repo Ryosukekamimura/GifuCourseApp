@@ -24,45 +24,13 @@
                   <v-icon>mdi-thumb-down</v-icon>
                 </v-btn>
                 {{ course.minus }}
+<!--                :id="'purchase-' + item.id"-->
 
-
-                  <v-dialog
-                    v-model="dialog"
-                    width="500"
-                  >
-                    <template v-slot:activator="{ on, attrs }">
-                      <v-btn
-                        v-bind="attrs"
-                        v-on="on"
-                        @click.stop="dialog = true"
-                      >
-                        <v-icon>mdi-comment</v-icon>
-                      </v-btn>
-                    </template>
-
-                    <v-card>
-                      <v-card-title class="headline grey lighten-2">
-                        Privacy Policy
-                      </v-card-title>
-
-                      <v-card-text>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                      </v-card-text>
-
-                      <v-divider></v-divider>
-
-                      <v-card-actions>
-                        <v-spacer></v-spacer>
-                        <v-btn
-                          color="primary"
-                          text
-                          @click="dialog = false"
-                        >
-                          I accept
-                        </v-btn>
-                      </v-card-actions>
-                    </v-card>
-                  </v-dialog>
+                <nuxt-link :to="'/courses/' + course._id" style="text-decoration: none">
+                  <v-btn plain>
+                    <v-icon>mdi-message-text</v-icon>
+                  </v-btn>
+                </nuxt-link>
               </div>
             </v-card>
           </v-col>
