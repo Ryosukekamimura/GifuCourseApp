@@ -3,17 +3,11 @@
     <v-app-bar
       fixed
       app
+      color="light-gray"
     >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"/>
       <v-toolbar-title v-text="title"/>
       <v-spacer />
-
-      <nuxt-link to="/about" style="text-decoration: none">
-        <v-btn plain>
-          <v-icon>mdi-apps</v-icon>
-            About
-        </v-btn>
-      </nuxt-link>
 
       <nuxt-link to="/ranking" style="text-decoration: none">
         <v-btn plain>

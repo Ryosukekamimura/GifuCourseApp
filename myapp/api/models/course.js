@@ -8,6 +8,8 @@ var CourseSchema = new Schema({
     lecture_name: {type: String},
     lecture_season: {type: String},
     teacher_name: {type: String},
+    plus: {type: Number},
+    minus: {type: Number}
 })
 
 // virtual for course's URL
