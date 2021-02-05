@@ -3,29 +3,46 @@
     <h1>
       詳細
     </h1>
-    <div v-if="isFetched" align="center">
-      <div>
-        <h3>講義名</h3>
-        <h2>
-          {{ course.lecture_name}}
-        </h2>
-      </div>
-      <div>
-        <h3>開講期間</h3>
-        <h2>
-          {{ course.lecture_season}}
-        </h2>
-      </div>
-      <div>
-        <h3>教員名</h3>
-        <h2>
-          {{ course.teacher_name}}
-        </h2>
-      </div>
-      <div>
-        <h3>コメント一覧</h3>
+
+    <v-card color="blue lighten-4">
+
+      <div v-if="isFetched" align="center">
+        <div class="ma-4">
+          <h3>講義名</h3>
+          <h1>
+            {{ course.lecture_name}}
+          </h1>
+        </div>
+
+        <div class="ma-4">
+          <h3>開講期間</h3>
+          <h2>
+            {{ course.lecture_season}}
+          </h2>
+        </div>
+
+        <div class="ma-4">
+          <h3>教員名</h3>
+          <h2>
+            {{ course.teacher_name }}
+          </h2>
+        </div>
+
+        <div class="ma-4">
+          <v-btn :href="getCourseURL(course.lecture_code)" text large rounded color="gray" outlined>
+            シラバス URL
+          </v-btn>
+        </div>
       </div>
 
+        <v-spacer></v-spacer>
+      </v-card>
+      <v-spacer></v-spacer>
+      
+
+      <div align="left">
+        <h3>コメント一覧</h3>
+      </div>
       <v-spacer></v-spacer>
 
       <v-textarea
@@ -34,14 +51,17 @@
         outlined
         rows="1"
         row-height="15"
+        class="ma-4"
       ></v-textarea>
 
       <p>個人を特定したコメント並びに、誹謗中傷は禁止させていただきます。</p>
       <p>感想を送信するには、ログインが必要となります。</p>
-      <v-btn depressed color="blue">
-        送信
-      </v-btn>
-    </div>
+      <div>
+        <v-btn depressed color="blue">
+          送信
+        </v-btn>
+      </div>
+
   </v-container>
 </template>
 
@@ -52,6 +72,11 @@
       return {
         course: null,
         isFetched: false,
+      }
+    },
+    methods: {
+      getCourseURL: function(id) {
+        return "https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&value(semekikn)=1&value(kougicd)=" + id + "&value(crclumcd)="
       }
     },
     mounted() {

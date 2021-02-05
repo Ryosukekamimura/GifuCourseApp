@@ -46,9 +46,9 @@ def addListDictonary(read_data):
         if read_data[i] == search_number:
             dict = {}
             print("id -> {0}".format(local_number))
-            dict["id"] = local_number
+
             dict["lecture_code"] = read_data[i+1].replace('\n', '')
-            dict["lecture_name"] = read_data[i+3].replace('\n', '')
+            dict["lecture_title"] = read_data[i+3].replace('\n', '')
             dict["lecture_season"] = read_data[i+5].replace('\n', '')
             dict["teacher_name"] = read_data[i+6].replace('\n', '')
 
@@ -62,65 +62,34 @@ for i in range(4):
     with open('../scripts/courses/Campusmate' + str(3-i) + '.html', encoding='utf-8') as f:
         html = f.read()
     soup = BeautifulSoup(html, 'html.parser')
-
+    print(soup)
     soup_td_text = soup.find('td').text.split('No')[1].split('<!--')[0]
-
+    print(soup_td_text)
     writeOutputFile(soup_td_text)
 
     openFile()
 
 print("Not Connect to MongoDB")
 
-count = 1
 for dict in dict_list:
-    dict["id"] = count
     dict["like"] = 0
     dict["unlike"] = 0
     dict["comments"] = []
-    dict["isExclusion"] = False
-    count += 1
 
 print(dict_list)
 
-print("==================REWRITE ++++++++++++++++")
+new_dict_list = []
 
-not_deleted_list = []
-
-# for dict in dict_list:
-#     if "英語" in dict["lecture_name"]:
-#         print(dict["lecture_name"])
-#         dict_list.remove(dict)
-#     else:
-#         not_deleted_list.append(dict["lecture_name"])
-
-length = len(dict_list)
-for i in range(length-1):
-    if "英語" in dict_list[i]["lecture_name"]:
-        print(dict_list[i]["lecture_name"])
-        dict["isExclusion"] = True
-    else:
-        not_deleted_list.append(dict_list[i]["lecture_name"])
-
-
-
-pprint.pprint(dict_list)
-print(not_deleted_list)
-
-
-print("-----------------------")
-pprint.pprint(dict_list)
-
-
-# TODO: 一括で削除するようなプログラムを書かないといけない。
+# deleted properties
+deleted_lecture_names = []
 
 for dict in dict_list:
-    if dict["isExclusion"]:
-        dict_list.remove(dict)
+    if "英語" in dict["lecture_title"] or "ドイツ語" in dict["lecture_title"] or "中国語" in dict["lecture_title"] or "初年次セミナー" in dict["lecture_title"] or "フランス語" in dict["lecture_title"]:
+        print(dict["lecture_title"])
+        deleted_lecture_names.append(dict["lecture_title"])
+    else:
+        new_dict_list.append(dict)
 
 
-pprint.pprint(dict_list)
-
-
-
-
-
+pprint.pprint(new_dict_list)
+print(deleted_lecture_names)
