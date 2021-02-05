@@ -4,6 +4,7 @@ import csv
 import pandas as pd
 import pymongo
 import MongoDBKey
+import pprint
 
 
 dict_list = []
@@ -73,13 +74,51 @@ print("Not Connect to MongoDB")
 count = 1
 for dict in dict_list:
     dict["id"] = count
-    dict["plus"] = 0
-    dict["minus"] = 0
+    dict["like"] = 0
+    dict["unlike"] = 0
+    dict["comments"] = []
+    dict["isExclusion"] = False
     count += 1
 
 print(dict_list)
 
-connectToMongoDB(dict_list=dict_list)
+print("==================REWRITE ++++++++++++++++")
+
+not_deleted_list = []
+
+# for dict in dict_list:
+#     if "英語" in dict["lecture_name"]:
+#         print(dict["lecture_name"])
+#         dict_list.remove(dict)
+#     else:
+#         not_deleted_list.append(dict["lecture_name"])
+
+length = len(dict_list)
+for i in range(length-1):
+    if "英語" in dict_list[i]["lecture_name"]:
+        print(dict_list[i]["lecture_name"])
+        dict["isExclusion"] = True
+    else:
+        not_deleted_list.append(dict_list[i]["lecture_name"])
+
+
+
+pprint.pprint(dict_list)
+print(not_deleted_list)
+
+
+print("-----------------------")
+pprint.pprint(dict_list)
+
+
+# TODO: 一括で削除するようなプログラムを書かないといけない。
+
+for dict in dict_list:
+    if dict["isExclusion"]:
+        dict_list.remove(dict)
+
+
+pprint.pprint(dict_list)
 
 
 
