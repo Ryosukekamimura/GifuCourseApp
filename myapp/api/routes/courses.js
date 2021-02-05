@@ -5,6 +5,20 @@ var router = express.Router()
 var course_controller = require('../controllers/courseController')
 
 /// COURSES ROUTES ///
+
+// get all courses
 router.get('/', course_controller.course_list)
+
+// get a course
+router.get('/:id', course_controller.course_details)
+
+// get plus button
+router.get('/likes/:id/plus/', course_controller.course_like_plus)
+
+// get minus button
+router.get('/likes/:id/minus/', course_controller.course_like_minus)
+
+
+
 
 module.exports = router
