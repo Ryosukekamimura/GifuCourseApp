@@ -10,7 +10,7 @@
           >
             <v-card tile py-2 class="mx-auto" :elevation="5" align="center">
               <v-card-text>
-                {{ course.lecture_name}}
+                {{ course.lecture_title}}
                 <br>
                 {{ course.lecture_season }}
               </v-card-text>

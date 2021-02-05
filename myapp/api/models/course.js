@@ -3,14 +3,13 @@ const { get } = require('../routes')
 var Schema = mongoose.Schema
 
 var CourseSchema = new Schema({
-    id: {type: String, required: true },
     lecture_code: {type: String, required: true },
-    lecture_name: {type: String},
+    lecture_title: {type: String},
     lecture_season: {type: String},
     teacher_name: {type: String},
     like: {type: Number},
     unlike: {type: Number},
-
+    comments: {type: Array},
 })
 
 // virtual for course's URL

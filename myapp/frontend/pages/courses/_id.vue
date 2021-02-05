@@ -38,7 +38,7 @@
         <v-spacer></v-spacer>
       </v-card>
       <v-spacer></v-spacer>
-      
+
 
       <div align="left">
         <h3>コメント一覧</h3>
