@@ -62,9 +62,8 @@ for i in range(4):
     with open('../scripts/courses/Campusmate' + str(3-i) + '.html', encoding='utf-8') as f:
         html = f.read()
     soup = BeautifulSoup(html, 'html.parser')
-    print(soup)
+
     soup_td_text = soup.find('td').text.split('No')[1].split('<!--')[0]
-    print(soup_td_text)
     writeOutputFile(soup_td_text)
 
     openFile()
@@ -93,3 +92,6 @@ for dict in dict_list:
 
 pprint.pprint(new_dict_list)
 print(deleted_lecture_names)
+
+# Connect To Database
+connectToMongoDB(new_dict_list)
