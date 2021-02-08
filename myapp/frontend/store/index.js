@@ -28,8 +28,19 @@
 //   plugins: [vuexLocal.plugin]
 // }
 
+import createPersistedState from "vuex-persistedstate";
+import localStorage from "~/src/plugins/localStorage";
 
+export const state = () => ({
+  count: 0,
+  message: 'Hello World!'
+})
 
+export const mutations = {
+  increment(state) {
+    state.count++
+  }
+}
 
 
 

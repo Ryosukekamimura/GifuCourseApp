@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p>{{ $store.state.counter }}</p>
+    <p>{{ this.$store.state.count }}</p>
     <button @click="counter">ボタン</button>
 <!--    <p>{{  }}</p>-->
   </div>
@@ -10,7 +10,7 @@
 export default {
   methods: {
     counter() {
-      this.$store.state.increment
+      this.$store.commit('increment')
     }
   }
 }
