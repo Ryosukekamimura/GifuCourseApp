@@ -17,6 +17,13 @@
       </v-btn>
     </div>
 
+    <div>
+      <nuxt-link to="todos">
+        <h1>TODOS</h1>
+
+      </nuxt-link>
+    </div>
+
 
 <!--    <div align="center">-->
 <!--      <p>岐阜大学のメールアドレスを入力してください</p>-->
@@ -36,7 +43,7 @@
 </template>
 
 <script>
-  import firebase from '../src/firebaseConfig'
+  import firebase from '../src/plugins/firebaseConfig'
 
   export default {
     data() {
@@ -56,6 +63,8 @@
               .signInWithPopup(authUI)
               .then(result => {
                 console.log(result)
+
+
                 resolve(result)
               })
               .catch(error => {

@@ -28,6 +28,13 @@
     "_name": "_5a02dd10"
   },
   {
+    "name": "todos",
+    "path": "/todos",
+    "component": "/Users/kamimura/development/Node/Course_Registration_Gifu_Univ/myapp/frontend/pages/todos.vue",
+    "chunkName": "pages/todos",
+    "_name": "_22fa3272"
+  },
+  {
     "name": "courses-id",
     "path": "/courses/:id?",
     "component": "/Users/kamimura/development/Node/Course_Registration_Gifu_Univ/myapp/frontend/pages/courses/_id.vue",
