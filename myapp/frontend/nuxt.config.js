@@ -25,6 +25,7 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    { src: '~/src/plugins/localStorage', ssr: false }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -36,6 +37,9 @@ export default {
     '@nuxt/typescript-build',
     // https://go.nuxtjs.dev/vuetify
     '@nuxtjs/vuetify',
+    // https://composition-api.nuxtjs.org/
+    '@nuxtjs/composition-api',
+
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -63,5 +67,9 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+  },
+
+  generate: {
+    interval: 2000,
   }
 }

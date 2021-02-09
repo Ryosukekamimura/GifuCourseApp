@@ -5,9 +5,9 @@ import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
 const _1b7bc787 = () => interopDefault(import('../pages/account.vue' /* webpackChunkName: "pages/account" */))
-const _792691b4 = () => interopDefault(import('../pages/inspire.vue' /* webpackChunkName: "pages/inspire" */))
 const _3ee2d17a = () => interopDefault(import('../pages/login.vue' /* webpackChunkName: "pages/login" */))
 const _5a02dd10 = () => interopDefault(import('../pages/ranking.vue' /* webpackChunkName: "pages/ranking" */))
+const _22fa3272 = () => interopDefault(import('../pages/todos.vue' /* webpackChunkName: "pages/todos" */))
 const _4633d83d = () => interopDefault(import('../pages/courses/_id.vue' /* webpackChunkName: "pages/courses/_id" */))
 const _16e6f42c = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
 
@@ -32,10 +32,6 @@ export const routerOptions = {
     component: _1b7bc787,
     name: "account"
   }, {
-    path: "/inspire",
-    component: _792691b4,
-    name: "inspire"
-  }, {
     path: "/login",
     component: _3ee2d17a,
     name: "login"
@@ -43,6 +39,10 @@ export const routerOptions = {
     path: "/ranking",
     component: _5a02dd10,
     name: "ranking"
+  }, {
+    path: "/todos",
+    component: _22fa3272,
+    name: "todos"
   }, {
     path: "/courses/:id?",
     component: _4633d83d,
