@@ -7,13 +7,6 @@
     "_name": "_1b7bc787"
   },
   {
-    "name": "inspire",
-    "path": "/inspire",
-    "component": "/Users/kamimura/development/Node/Course_Registration_Gifu_Univ/myapp/frontend/pages/inspire.vue",
-    "chunkName": "pages/inspire",
-    "_name": "_792691b4"
-  },
-  {
     "name": "login",
     "path": "/login",
     "component": "/Users/kamimura/development/Node/Course_Registration_Gifu_Univ/myapp/frontend/pages/login.vue",
