@@ -16,8 +16,10 @@ export const mutations = {
   },
   changeLogin(state){
     if (state.isLogin){
+      console.log('ログアウトしました')
       state.isLogin = false
     }else{
+      console.log('ログインしました')
       state.isLogin = true
     }
   }

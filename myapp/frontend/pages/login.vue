@@ -61,6 +61,24 @@
           })
         }
 
+        //**認証後のユーザー情報を取得してオブジェクト化 */
+        const getAccountData = result => {
+          return new Promise((resolve, reject) => {
+            let userObject = {}
+            let user = result.user
+            userObject.token = result.credential.accessToken
+            userObject.refreshToken = user.refreshToken
+            userObject.uid = user.uid
+            userObject.displayName = user.displayName
+            userObject.photoURL = user.photoURL
+            userObject.email = user.email
+            userObject.isNewUser = result.additionalUserInfo.isNewUser
+            userObject.providerId = resul.additionalUserInfo.providerId
+            console.log(userObject)
+            resolve(userObject)
+          })
+        }
+
         // ** 実行する
         Promise.resolve()
           .then(this.setPersistence)
@@ -77,6 +95,9 @@
               resolve()
             })
         }))
+      },
+      creatPhotoURL(userObject){
+
       },
       changeLoginStatus() {
         this.$store.commit('changeLogin')

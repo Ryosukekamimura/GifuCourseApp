@@ -14,6 +14,42 @@
         max-width="256"
       ></v-img>
     </v-row>
+
+    <div v-if="this.$store.state.isLogin">
+      <v-btn color="light-blue" @click="signOut">
+        サインアウト
+      </v-btn>
+    </div>
+    <div v-else>
+      <nuxt-link to="/login" style="text-decoration:none">
+        <v-btn color="light-orange">
+          サインイン
+        </v-btn>
+      </nuxt-link>
+    </div>
     </div>
   </v-container>
 </template>
+
+
+<script>
+  import firebase from '../src/plugins/firebaseConfig'
+
+  export default{
+    methods: {
+      signOut(){
+        firebase.auth().signOut().then(() => {
+          // Success Sign-out
+          this.changeLoginStatus()
+          console.log('Sign Outしました')
+        }).catch((error) => {
+          // Error
+          console.log(error)
+        })
+      },
+      changeLoginStatus(){
+        this.$store.commit('changeLogin')
+      }
+    }
+  }
+</script>
