@@ -101,13 +101,18 @@
           }, {merge: true})
           .then(result => {
             resolve(userObject)
-            console.log("Success")
+            // ログイン後、ホームページに移動
+            this.moveHomepage()
           })
         })
       },
       // Webストレージのログイン情報をアップデートする
       updateLogin(displayName) {
         this.$store.commit('updateLogin', displayName)
+      },
+      // ログイン後、ホームページへ移動
+      moveHomepage(){
+        this.$router.replace('/')
       }
     }
   }
