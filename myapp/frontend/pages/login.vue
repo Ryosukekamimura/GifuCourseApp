@@ -23,27 +23,12 @@
 
       </nuxt-link>
     </div>
-
-
-<!--    <div align="center">-->
-<!--      <p>岐阜大学のメールアドレスを入力してください</p>-->
-<!--      <v-text-field v-model="email" label="Email" placeholder="岐阜大学メールアドレス"></v-text-field>-->
-<!--      <v-btn @click="emailAuth" color="red ma-4 pa-5">-->
-<!--        <v-row class="pa-5">-->
-<!--          <v-icon class="white&#45;&#45;text">-->
-<!--            mdi-email-->
-<!--          </v-icon>-->
-<!--          <h4 class="white&#45;&#45;text">-->
-<!--            メールアドレスでログイン-->
-<!--          </h4>-->
-<!--        </v-row>-->
-<!--      </v-btn>-->
-<!--    </div>-->
   </v-container>
 </template>
 
 <script>
-  import firebase from '../src/plugins/firebaseConfig'
+  import firebase, { firestore } from '../src/plugins/firebaseConfig'
+  import "firebase/firestore"
 
   export default {
     data() {
@@ -63,9 +48,9 @@
               .signInWithPopup(authUI)
               .then(result => {
                 console.log(result)
-
-
                 resolve(result)
+                // ログイン成功時、ログインステータスを変更する
+                this.changeLoginStatus()
               })
               .catch(error => {
                 // Handle Errors here.
@@ -73,8 +58,25 @@
                 const errorMessage = error.message
                 const email = error.email
                 const credential = error.credential
-
               })
+          })
+        }
+
+        //**認証後のユーザー情報を取得してオブジェクト化 */
+        const getAccountData = result => {
+          return new Promise((resolve, reject) => {
+            let userObject = {}
+            let user = result.user
+            userObject.token = result.credential.accessToken
+            userObject.refreshToken = user.refreshToken
+            userObject.uid = user.uid
+            userObject.displayName = user.displayName
+            userObject.photoURL = user.photoURL
+            userObject.email = user.email
+            userObject.isNewUser = result.additionalUserInfo.isNewUser
+            userObject.providerId = result.additionalUserInfo.providerId
+            console.log(userObject)
+            resolve(userObject)
           })
         }
 
@@ -82,6 +84,9 @@
         Promise.resolve()
           .then(this.setPersistence)
           .then(auth)
+          .then(getAccountData)
+          .then(userObject => this.writeCloudStore(userObject))
+          // TODO: Firebase CloudStoreに接続する
       },
       // ** 認証状態を明示的にセットする
       setPersistence() {
@@ -93,6 +98,27 @@
               resolve()
             })
         }))
+      },
+      //** CloudStoreに書き込む */
+      writeCloudStore(userObject){
+        return new Promise((resolve, reject) => {
+          var userRef = firestore.collection("v1").doc("users").collection("user")
+
+          userRef.doc(userObject.uid).set({
+            userId: userObject.uid,
+            displayName: userObject.displayName
+          }, {merge: true})
+          .then(result => {
+            resolve(userObject)
+            console.log("Success")
+          })
+        })
+      },
+      creatPhotoURL(userObject){
+
+      },
+      changeLoginStatus() {
+        this.$store.commit('changeLogin')
       }
     }
   }

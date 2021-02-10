@@ -46,22 +46,21 @@
       <v-spacer></v-spacer>
 
       <v-textarea
-        label="感想 (ex: 面白かった) (ex: 先生がずっと話している講義だった) (ex: 〇〇を改善してほしい)"
+        label="感想 [ex: 面白かった] [ex: 先生がずっと話している講義だった] [ex: 〇〇を改善してほしい]"
         auto-grow
         outlined
         rows="1"
         row-height="15"
         class="ma-4"
       ></v-textarea>
-
-      <p>個人を特定したコメント並びに、誹謗中傷は禁止させていただきます。</p>
-      <p>感想を送信するには、ログインが必要となります。</p>
-      <div>
-        <v-btn depressed color="blue">
+      <div align="center">
+        <p>個人を特定したコメント並びに、誹謗中傷は禁止させていただきます。</p>
+        <p>感想を送信するには、ログインが必要となります。</p>
+        <v-btn depressed color="blue" @click="checkLogin">
           送信
         </v-btn>
+        <p>{{ checkLoginMessage }}</p>
       </div>
-
   </v-container>
 </template>
 
@@ -72,11 +71,19 @@
       return {
         course: null,
         isFetched: false,
+        checkLoginMessage: "",
       }
     },
     methods: {
       getCourseURL: function(id) {
         return "https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&value(semekikn)=1&value(kougicd)=" + id + "&value(crclumcd)="
+      },
+      checkLogin: function(){
+        if (this.$store.state.isLogin){
+          this.checkLoginMessage = '🤩ログインいます！'
+        }else{
+          this.checkLoginMessage = 'ログインしていません！'
+        }
       }
     },
     mounted() {
