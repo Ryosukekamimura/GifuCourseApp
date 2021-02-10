@@ -27,7 +27,8 @@
 </template>
 
 <script>
-  import firebase from '../src/plugins/firebaseConfig'
+  import firebase, { firestore } from '../src/plugins/firebaseConfig'
+  import "firebase/firestore"
 
   export default {
     data() {
@@ -73,7 +74,7 @@
             userObject.photoURL = user.photoURL
             userObject.email = user.email
             userObject.isNewUser = result.additionalUserInfo.isNewUser
-            userObject.providerId = resul.additionalUserInfo.providerId
+            userObject.providerId = result.additionalUserInfo.providerId
             console.log(userObject)
             resolve(userObject)
           })
@@ -83,6 +84,8 @@
         Promise.resolve()
           .then(this.setPersistence)
           .then(auth)
+          .then(getAccountData)
+          .then(userObject => this.writeCloudStore(userObject))
           // TODO: Firebase CloudStoreに接続する
       },
       // ** 認証状態を明示的にセットする
@@ -95,6 +98,21 @@
               resolve()
             })
         }))
+      },
+      //** CloudStoreに書き込む */
+      writeCloudStore(userObject){
+        return new Promise((resolve, reject) => {
+          var userRef = firestore.collection("v1").doc("users").collection("user")
+
+          userRef.doc(userObject.uid).set({
+            userId: userObject.uid,
+            displayName: userObject.displayName
+          }, {merge: true})
+          .then(result => {
+            resolve(userObject)
+            console.log("Success")
+          })
+        })
       },
       creatPhotoURL(userObject){
 
