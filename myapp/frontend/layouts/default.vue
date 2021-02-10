@@ -16,12 +16,24 @@
         </v-btn>
       </nuxt-link>
 
-      <nuxt-link to="/login" style="text-decoration: none">
-        <v-btn plain>
-          <v-icon>mdi-account</v-icon>
-          Login
-        </v-btn>
-      </nuxt-link>
+      <div v-if="this.$store.state.isLogin">
+        <!--is Login True-->
+        <nuxt-link to="/accout" style="text-decoration:none">
+          <v-btn plain>
+            <h1>🤩</h1>
+            <h3>Ryosuke Kamimura</h3>
+          </v-btn>
+        </nuxt-link>
+      </div>
+      <div v-else>
+        <!--is Login False-->
+        <nuxt-link to="/login" style="text-decoration: none">
+          <v-btn plain>
+            <v-icon>mdi-account</v-icon>
+            Login
+          </v-btn>
+        </nuxt-link>
+      </div>
     </v-app-bar>
 
     <v-main>

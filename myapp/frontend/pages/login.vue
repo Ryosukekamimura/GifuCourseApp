@@ -63,9 +63,9 @@
               .signInWithPopup(authUI)
               .then(result => {
                 console.log(result)
-
-
                 resolve(result)
+                // ログイン成功時、ログインステータスを変更する
+                this.changeLoginStatus()
               })
               .catch(error => {
                 // Handle Errors here.
@@ -73,7 +73,6 @@
                 const errorMessage = error.message
                 const email = error.email
                 const credential = error.credential
-
               })
           })
         }
@@ -82,6 +81,7 @@
         Promise.resolve()
           .then(this.setPersistence)
           .then(auth)
+          // TODO: Firebase CloudStoreに接続する
       },
       // ** 認証状態を明示的にセットする
       setPersistence() {
@@ -93,6 +93,9 @@
               resolve()
             })
         }))
+      },
+      changeLoginStatus() {
+        this.$store.commit('changeLogin')
       }
     }
   }
