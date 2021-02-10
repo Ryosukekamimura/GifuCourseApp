@@ -6,7 +6,9 @@
       color="light-gray"
     >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"/>
-      <v-toolbar-title v-text="title"/>
+      <nuxt-link to="/" style="text-decoration: none" color='black'>
+        <v-toolbar-title v-text="title"/>
+      </nuxt-link>
       <v-spacer />
 
       <nuxt-link to="/ranking" style="text-decoration: none">

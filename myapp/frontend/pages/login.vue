@@ -16,13 +16,6 @@
         </v-row>
       </v-btn>
     </div>
-
-    <div>
-      <nuxt-link to="todos">
-        <h1>TODOS</h1>
-
-      </nuxt-link>
-    </div>
   </v-container>
 </template>
 
@@ -49,8 +42,6 @@
               .then(result => {
                 console.log(result)
                 resolve(result)
-                // ログイン成功時、ログインステータスを変更する
-                this.changeLoginStatus()
               })
               .catch(error => {
                 // Handle Errors here.
@@ -86,7 +77,7 @@
           .then(auth)
           .then(getAccountData)
           .then(userObject => this.writeCloudStore(userObject))
-          // TODO: Firebase CloudStoreに接続する
+          .then(userObject => this.updateLogin(userObject.displayName))
       },
       // ** 認証状態を明示的にセットする
       setPersistence() {
@@ -114,11 +105,9 @@
           })
         })
       },
-      creatPhotoURL(userObject){
-
-      },
-      changeLoginStatus() {
-        this.$store.commit('changeLogin')
+      // Webストレージのログイン情報をアップデートする
+      updateLogin(displayName) {
+        this.$store.commit('updateLogin', displayName)
       }
     }
   }

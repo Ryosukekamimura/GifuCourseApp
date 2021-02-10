@@ -2,17 +2,13 @@
   <v-container>
     <div align="center">
     <v-row align='baseline' class="ma-4">
-      <h3 class="ma-4">Name</h3>
-      <h1>神村 亮佑</h1>
-    </v-row>
-
-    <v-row align='baseline' class="ma-4">
-      <v-img
-        contain
-        src='https://avatars.githubusercontent.com/u/52638834?s=400&u=b84ca46232a81c77045d99675a57900d7ba15af6&v=4'
-        max-height="256"
-        max-width="256"
-      ></v-img>
+      <div v-if="this.$store.state.isLogin" align="center">
+        <h3 class="ma-4">Name</h3>
+        <h1 v-if="this.$store.state.isLogin">{{ this.$store.state.displayName }}</h1>
+      </div>
+      <div v-else>
+        <h1>ログインしておりません。</h1>
+      </div>
     </v-row>
 
     <div v-if="this.$store.state.isLogin">
@@ -40,15 +36,12 @@
       signOut(){
         firebase.auth().signOut().then(() => {
           // Success Sign-out
-          this.changeLoginStatus()
+          this.$store.commit('updateLogout')
           console.log('Sign Outしました')
         }).catch((error) => {
           // Error
           console.log(error)
         })
-      },
-      changeLoginStatus(){
-        this.$store.commit('changeLogin')
       }
     }
   }
