@@ -77,7 +77,7 @@
           .then(auth)
           .then(getAccountData)
           .then(userObject => this.writeCloudStore(userObject))
-          .then(userObject => this.updateLogin(userObject.displayName))
+          .then(userObject => this.updateLogin(userObject.displayName, userObject.photoURL))
       },
       // ** 認証状態を明示的にセットする
       setPersistence() {
@@ -97,7 +97,8 @@
 
           userRef.doc(userObject.uid).set({
             userId: userObject.uid,
-            displayName: userObject.displayName
+            displayName: userObject.displayName,
+            profileImageURL: userObject.photoURL,
           }, {merge: true})
           .then(result => {
             resolve(userObject)

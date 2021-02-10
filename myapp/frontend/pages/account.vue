@@ -5,6 +5,7 @@
       <div v-if="this.$store.state.isLogin" align="center">
         <h3 class="ma-4">Name</h3>
         <h1 v-if="this.$store.state.isLogin">{{ this.$store.state.displayName }}</h1>
+        <v-img max-width="256" max-height="256" :src="this.$store.state.profileImageURL"></v-img>
       </div>
       <div v-else>
         <h1>ログインしておりません。</h1>
@@ -34,6 +35,7 @@
   export default{
     methods: {
       signOut(){
+        console.log(this.$store.state.profileImageURL)
         firebase.auth().signOut().then(() => {
           // Success Sign-out
           this.$store.commit('updateLogout')
@@ -42,7 +44,7 @@
           // Error
           console.log(error)
         })
-      }
+      },
     }
   }
 </script>

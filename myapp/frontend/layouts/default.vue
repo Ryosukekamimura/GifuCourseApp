@@ -11,10 +11,16 @@
       </nuxt-link>
       <v-spacer />
 
+      <nuxt-link to="/" style="text-decoration: none">
+        <v-btn plain>
+          <h1>🏠</h1>
+          <h3>Home</h3>
+        </v-btn>
+      </nuxt-link>
       <nuxt-link to="/ranking" style="text-decoration: none">
         <v-btn plain>
-          <v-icon>mdi-chess-king</v-icon>
-          Ranking
+          <h1>👑</h1>
+          <h3>Ranking</h3>
         </v-btn>
       </nuxt-link>
 
@@ -22,8 +28,8 @@
         <!--is Login True-->
         <nuxt-link to="/account" style="text-decoration:none">
           <v-btn plain>
-            <h1>🤩</h1>
-            <h3>Ryosuke Kamimura</h3>
+            <h1>👤</h1>
+            <h3>{{this.$store.state.displayName}}</h3>
           </v-btn>
         </nuxt-link>
       </div>
