@@ -23,22 +23,6 @@
 
       </nuxt-link>
     </div>
-
-
-<!--    <div align="center">-->
-<!--      <p>岐阜大学のメールアドレスを入力してください</p>-->
-<!--      <v-text-field v-model="email" label="Email" placeholder="岐阜大学メールアドレス"></v-text-field>-->
-<!--      <v-btn @click="emailAuth" color="red ma-4 pa-5">-->
-<!--        <v-row class="pa-5">-->
-<!--          <v-icon class="white&#45;&#45;text">-->
-<!--            mdi-email-->
-<!--          </v-icon>-->
-<!--          <h4 class="white&#45;&#45;text">-->
-<!--            メールアドレスでログイン-->
-<!--          </h4>-->
-<!--        </v-row>-->
-<!--      </v-btn>-->
-<!--    </div>-->
   </v-container>
 </template>
 

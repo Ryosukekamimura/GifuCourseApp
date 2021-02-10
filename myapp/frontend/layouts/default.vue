@@ -18,7 +18,7 @@
 
       <div v-if="this.$store.state.isLogin">
         <!--is Login True-->
-        <nuxt-link to="/accout" style="text-decoration:none">
+        <nuxt-link to="/account" style="text-decoration:none">
           <v-btn plain>
             <h1>🤩</h1>
             <h3>Ryosuke Kamimura</h3>
