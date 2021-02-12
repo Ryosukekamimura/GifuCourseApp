@@ -12,11 +12,15 @@ router.get('/', course_controller.course_list)
 // get a course
 router.get('/:id', course_controller.course_details)
 
-// get plus button
-router.get('/likes/:id/plus/', course_controller.course_like_plus)
+// // get plus button
+// router.get('/likes/:id/plus/', course_controller.course_like_plus)
+//
+// // get minus button
+// router.get('/likes/:id/minus/', course_controller.course_like_minus)
 
-// get minus button
-router.get('/likes/:id/minus/', course_controller.course_like_minus)
+
+// POST request for posting comments
+router.post('/create/comments', course_controller.comments_craete_post)
 
 
 

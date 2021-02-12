@@ -2,28 +2,34 @@ import createPersistedState from "vuex-persistedstate";
 import localStorage from "~/src/plugins/localStorage";
 
 export const state = () => ({
-  count: 0,
-  message: 'Hello World!',
   isLogin: false,
+  displayName: "",
 })
 
 export const mutations = {
-  increment(state) {
-    state.count++
+  updateLogin(state, displayName){
+    updateDisplayName(state, displayName)
+    login(state)
   },
-  changeMessage(state, message){
-    state.message = message
-  },
-  changeLogin(state){
-    if (state.isLogin){
-      console.log('ログアウトしました')
-      state.isLogin = false
-    }else{
-      console.log('ログインしました')
-      state.isLogin = true
-    }
+  updateLogout(state){
+    updateDisplayName(state, "")
+    updateProfileImageURL(state, "")
+    logout(state)
   }
 }
+// displayNameの更新
+function updateDisplayName(state, displayName){
+  state.displayName = displayName
+}
+
+function login(state){
+  state.isLogin = true
+}
+
+function logout(state){
+  state.isLogin = false
+}
+
 
 
 

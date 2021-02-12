@@ -42,6 +42,9 @@
 
       <div align="left">
         <h3>コメント一覧</h3>
+          <!-- <li v-for="comment in course.comments" :key="comment.message">
+            {{ comment.message }}
+          </li> -->
       </div>
       <v-spacer></v-spacer>
 
@@ -56,7 +59,7 @@
       <div align="center">
         <p>個人を特定したコメント並びに、誹謗中傷は禁止させていただきます。</p>
         <p>感想を送信するには、ログインが必要となります。</p>
-        <v-btn depressed color="blue" @click="checkLogin">
+        <v-btn depressed color="blue" @click="postComments('Nice Course!', course)">
           送信
         </v-btn>
         <p>{{ checkLoginMessage }}</p>
@@ -80,10 +83,33 @@
       },
       checkLogin: function(){
         if (this.$store.state.isLogin){
-          this.checkLoginMessage = '🤩ログインいます！'
+          this.checkLoginMessage = '🤩ログインしています！'
         }else{
           this.checkLoginMessage = 'ログインしていません！'
         }
+      },
+      postComments: function(comment ,course){
+        axios.post("http://localhost:8000/api/v1/courses/create/comments", {
+          id: course._id,
+          lecture_code: course.lecture_code,
+          lecture_title: course.lecture_title,
+          lecture_season: course.lecture_season,
+          teacher_name: course.teacher_name,
+          like: course.like,
+          unlike: course.unlike,
+          comment: comment
+        }, {
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer"
+          }
+        })
+        .then(() => {
+          console.log("Success To Send")
+        })
+        .catch(err => {
+          console.log(err)
+        })
       }
     },
     mounted() {

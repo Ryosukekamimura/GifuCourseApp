@@ -94,4 +94,4 @@ pprint.pprint(new_dict_list)
 print(deleted_lecture_names)
 
 # Connect To Database
-connectToMongoDB(new_dict_list)
+#connectToMongoDB(new_dict_list)

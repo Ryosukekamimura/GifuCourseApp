@@ -17,15 +17,13 @@
 
               <div align="center">
                 <v-btn text icon color="gray light-2" @click="add_plus_counter(course)" plain>
-                  <v-icon>mdi-thumb-up</v-icon>
+                  <h1>👍</h1>
                 </v-btn>
                 {{ course.plus }}
                 <v-btn text icon color="gray light-2" @click="add_minus_counter(course)" plain>
-                  <v-icon>mdi-thumb-down</v-icon>
+                  <h1>👎</h1>
                 </v-btn>
                 {{ course.minus }}
-<!--                :id="'purchase-' + item.id"-->
-
                 <nuxt-link :to="'/courses/' + course._id" style="text-decoration: none">
                   <v-btn plain>
                     <v-icon>mdi-message-text</v-icon>
