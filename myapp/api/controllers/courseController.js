@@ -25,16 +25,11 @@ exports.comments_craete_post = function(req, res, next){
     // Extract validation errors from a request
     const errors = validationResult(req)
     // Create New Comments
-    console.log(req.body)
-    console.log(req.body.comment)
-    console.log('OK')
-
     var comment = new Comment({
         _id: req.body.id,
         comment: req.body.comment
     })
-
-    console.log(req.body.id)
+    
     if (!errors.isEmpty()){
         console.log('Error: '+ errors)
     }
