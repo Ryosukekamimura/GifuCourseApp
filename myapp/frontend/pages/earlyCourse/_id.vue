@@ -10,7 +10,7 @@
         <div class="ma-4">
           <h3>講義名</h3>
           <h1>
-            {{ course.lecture_name}}
+            {{ course.lecture_title}}
           </h1>
         </div>
 
@@ -42,9 +42,7 @@
 
       <div align="left">
         <h3>コメント一覧</h3>
-          <!-- <li v-for="comment in course.comments" :key="comment.message">
-            {{ comment.message }}
-          </li> -->
+        <h5 align="center">コメントはありません</h5>
       </div>
       <v-spacer></v-spacer>
 
@@ -64,6 +62,12 @@
         </v-btn>
         <p>{{ checkLoginMessage }}</p>
       </div>
+
+      <div>
+        <v-btn @click="fetchComments">
+          コメントを確認する
+        </v-btn>
+      </div>
   </v-container>
 </template>
 
@@ -75,12 +79,15 @@
         course: null,
         isFetched: false,
         checkLoginMessage: "",
+        comments: null,
       }
     },
     methods: {
+      // シラバスのURLを作成
       getCourseURL: function(id) {
         return "https://alss-portal.gifu-u.ac.jp/campusweb/slbssbdr.do?value(risyunen)=2020&value(semekikn)=1&value(kougicd)=" + id + "&value(crclumcd)="
       },
+      // ログインしているかチェックする
       checkLogin: function(){
         if (this.$store.state.isLogin){
           this.checkLoginMessage = '🤩ログインしています！'
@@ -88,15 +95,10 @@
           this.checkLoginMessage = 'ログインしていません！'
         }
       },
+      // コメントをpostする
       postComments: function(comment ,course){
         axios.post("http://localhost:8000/api/v1/courses/create/comments", {
           id: course._id,
-          lecture_code: course.lecture_code,
-          lecture_title: course.lecture_title,
-          lecture_season: course.lecture_season,
-          teacher_name: course.teacher_name,
-          like: course.like,
-          unlike: course.unlike,
           comment: comment
         }, {
           headers: {
@@ -110,11 +112,19 @@
         .catch(err => {
           console.log(err)
         })
+      },
+      // コメントをFetchする
+      fetchComments: function(){
+        axios.get('http://localhost:8000/api/v1/courses/601d1dc76f30f41c7072c5ae/comments')
+        .then(res => {
+          console.log('Fetch コメント')
+          console.log(res.data)
+        })
       }
     },
     mounted() {
       // HTTP request
-      axios.get('http://localhost:8000/api/v1/courses/' + this.$route.params.id )
+      axios.get('http://localhost:8000/api/v1/courses/early/' + this.$route.params.id )
       .then(res => {
         console.log('Success to Fetch API')
         console.log(res.data)

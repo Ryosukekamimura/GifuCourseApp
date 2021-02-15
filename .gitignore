@@ -1,5 +1,4 @@
 scripts/courses
-myapp/frontend/.nuxt/
 scripts/__pycache__
 scripts/outputFile2.txt
 scripts/MongoDBKey.py
