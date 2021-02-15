@@ -18,8 +18,17 @@ exports.course_details = function(req, res, next) {
             if (err) { return next(err) }
             res.json(result)
         })
-
 }
+
+exports.comments_list = function(req, res, next){
+    Comment.findById(req.params.id)
+        .exec(function(err, result){
+            if(err) { return next(err) }
+            console.log(result)
+            res.json(result)
+        })
+}
+
 
 exports.comments_craete_post = function(req, res, next){
     // Extract validation errors from a request
@@ -29,7 +38,7 @@ exports.comments_craete_post = function(req, res, next){
         _id: req.body.id,
         comment: req.body.comment
     })
-    
+
     if (!errors.isEmpty()){
         console.log('Error: '+ errors)
     }

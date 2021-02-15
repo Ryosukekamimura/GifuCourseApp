@@ -8,26 +8,15 @@
             sm="4"
             class="mb-4"
           >
-            <v-card tile py-2 class="mx-auto" :elevation="5" align="center">
+            <v-card tile py-2 class="ma-3" :elevation="5" align="center">
               <v-card-text>
-                {{ course.lecture_title}}
-                <br>
+                <h3>{{ course.lecture_title}}</h3>
                 {{ course.lecture_season }}
               </v-card-text>
 
-              <div align="center">
-                <v-btn text icon color="gray light-2" @click="add_plus_counter(course)" plain>
-                  <h1>👍</h1>
-                </v-btn>
-                {{ course.plus }}
-                <v-btn text icon color="gray light-2" @click="add_minus_counter(course)" plain>
-                  <h1>👎</h1>
-                </v-btn>
-                {{ course.minus }}
+              <div align="right">
                 <nuxt-link :to="'/courses/' + course._id" style="text-decoration: none">
-                  <v-btn plain>
-                    <v-icon>mdi-message-text</v-icon>
-                  </v-btn>
+                  <v-btn class="ma-1" color="blue lighten-2 white--text font-weight-bold" large :elevation="5">詳細をみる</v-btn>
                 </nuxt-link>
               </div>
             </v-card>
