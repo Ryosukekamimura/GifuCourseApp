@@ -12,9 +12,9 @@ export const mutations = {
     login(state)
   },
   updateLogout(state){
-    updateDisplayName(state, "")
-    updateProfileImageURL(state, "")
+    updateDisplayName(state, "ログインしていません。")
     logout(state)
+    console.log(state.isLogin)
   }
 }
 // displayNameの更新

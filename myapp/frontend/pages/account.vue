@@ -35,14 +35,16 @@
   export default{
     methods: {
       signOut(){
-        console.log(this.$store.state.profileImageURL)
         firebase.auth().signOut().then(() => {
           // Success Sign-out
           this.$store.commit('updateLogout')
+          console.log(this.$stre.state.displayName)
           console.log('Sign Outしました')
         }).catch((error) => {
           // Error
           console.log(error)
+          console.log('Sign Outに失敗しました')
+          this.$store.commit('updateLogout')
         })
       },
     }
