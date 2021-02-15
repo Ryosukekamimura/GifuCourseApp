@@ -12,7 +12,7 @@ export const mutations = {
     login(state)
   },
   updateLogout(state){
-    updateDisplayName(state, "ログインしていません。")
+    updateDisplayName(state, "")
     logout(state)
     console.log(state.isLogin)
   }

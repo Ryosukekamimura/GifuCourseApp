@@ -3,36 +3,35 @@
     "name": "account",
     "path": "/account",
     "component": "/Users/kamimura/development/Node/Course_Registration_Gifu_Univ/myapp/frontend/pages/account.vue",
-    "chunkName": "pages/account"
+    "chunkName": "pages/account",
+    "_name": "_1b7bc787"
   },
   {
     "name": "login",
     "path": "/login",
     "component": "/Users/kamimura/development/Node/Course_Registration_Gifu_Univ/myapp/frontend/pages/login.vue",
-    "chunkName": "pages/login"
+    "chunkName": "pages/login",
+    "_name": "_3ee2d17a"
   },
   {
     "name": "ranking",
     "path": "/ranking",
     "component": "/Users/kamimura/development/Node/Course_Registration_Gifu_Univ/myapp/frontend/pages/ranking.vue",
-    "chunkName": "pages/ranking"
-  },
-  {
-    "name": "todos",
-    "path": "/todos",
-    "component": "/Users/kamimura/development/Node/Course_Registration_Gifu_Univ/myapp/frontend/pages/todos.vue",
-    "chunkName": "pages/todos"
+    "chunkName": "pages/ranking",
+    "_name": "_5a02dd10"
   },
   {
     "name": "courses-id",
     "path": "/courses/:id?",
     "component": "/Users/kamimura/development/Node/Course_Registration_Gifu_Univ/myapp/frontend/pages/courses/_id.vue",
-    "chunkName": "pages/courses/_id"
+    "chunkName": "pages/courses/_id",
+    "_name": "_4633d83d"
   },
   {
     "name": "index",
     "path": "/",
     "component": "/Users/kamimura/development/Node/Course_Registration_Gifu_Univ/myapp/frontend/pages/index.vue",
-    "chunkName": "pages/index"
+    "chunkName": "pages/index",
+    "_name": "_16e6f42c"
   }
 ]
