@@ -37,8 +37,8 @@
         <!--is Login False-->
         <nuxt-link to="/login" style="text-decoration: none">
           <v-btn plain>
-            <v-icon>mdi-account</v-icon>
-            Login
+            <h1>👤</h1>
+            <h3>Login</h3>
           </v-btn>
         </nuxt-link>
       </div>
