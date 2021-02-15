@@ -4,24 +4,48 @@ var Comment = require('../models/comments')
 const { body, validationResult } = require('express-validator')
 var async = require('async')
 
-exports.course_list = function(req, res, next) {
+// GET 前期授業を表示する
+exports.early_course_list = function(req, res, next) {
     Course
-        .find()
-        .then(function(courses) {
-            res.json(courses)
+        .find({is_early_course: 1}, function(err, result){
+            if (err) { return next(err) }
+            res.json(result)
         })
 }
 
-exports.course_details = function(req, res, next) {
-    Course.findById(req.params.id)
+// GET 前期授業の詳細を表示する
+exports.early_course_details = function(req, res, next) {
+    Course
+        .findById(req.params.id)
         .exec(function(err, result) {
             if (err) { return next(err) }
             res.json(result)
         })
 }
 
+// GET 後期授業を表示する
+exports.latter_course_list = function(req, res, next){
+    Course
+        .find({is_early_course: 0}, function(err, result){
+            if (err) { return next(err) }
+            res.json(result)
+        })
+}
+
+// GET 後期授業の詳細を表示する
+exports.latter_course_details = function(req, res, next){
+    Course
+        .findById(req.params.id)
+        .exec(function(err, result){
+            if (err) { return next(err) }
+            res.json(result)
+        })
+}
+
+// GET コメントのリストを表示する
 exports.comments_list = function(req, res, next){
-    Comment.findById(req.params.id)
+    Comment
+        .findById(req.params.id)
         .exec(function(err, result){
             if(err) { return next(err) }
             console.log(result)
@@ -29,7 +53,7 @@ exports.comments_list = function(req, res, next){
         })
 }
 
-
+// POST コメントを追加する
 exports.comments_craete_post = function(req, res, next){
     // Extract validation errors from a request
     const errors = validationResult(req)
@@ -52,6 +76,7 @@ exports.comments_craete_post = function(req, res, next){
         })
     }
 }
+
 
 exports.course_like_plus = function(req, res, next) {
     Course.findByIdAndUpdate(req.params.id)

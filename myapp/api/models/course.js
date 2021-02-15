@@ -9,6 +9,7 @@ var CourseSchema = new Schema({
     teacher_name: {type: String},
     like: {type: Number},
     unlike: {type: Number},
+    is_early_course: {type:Number},
 })
 
 // virtual for course's URL

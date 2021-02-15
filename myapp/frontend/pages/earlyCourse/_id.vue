@@ -10,7 +10,7 @@
         <div class="ma-4">
           <h3>講義名</h3>
           <h1>
-            {{ course.lecture_name}}
+            {{ course.lecture_title}}
           </h1>
         </div>
 
@@ -124,7 +124,7 @@
     },
     mounted() {
       // HTTP request
-      axios.get('http://localhost:8000/api/v1/courses/' + this.$route.params.id )
+      axios.get('http://localhost:8000/api/v1/courses/early/' + this.$route.params.id )
       .then(res => {
         console.log('Success to Fetch API')
         console.log(res.data)

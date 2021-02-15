@@ -22,7 +22,7 @@
         <!-- 前期　-->
         <v-row no-gutters>
           <v-col
-            v-for="(course, index) in courses"
+            v-for="(course, index) in earlyCourses"
             :key="index"
             cols="12"
             sm="4"
@@ -35,7 +35,7 @@
               </v-card-text>
 
               <div align="right">
-                <nuxt-link :to="'/courses/' + course._id" style="text-decoration: none">
+                <nuxt-link :to="'/earlyCourse/' + course._id" style="text-decoration: none">
                   <v-btn class="ma-1" color="blue lighten-2 white--text font-weight-bold" large :elevation="5">詳細をみる</v-btn>
                 </nuxt-link>
               </div>
@@ -44,32 +44,31 @@
         </v-row>
       </v-tab-item>
       <v-tab-item>
-        <v-card flat>
-          <v-card-title class="headline">
-            An awesome title
-          </v-card-title>
-          <v-card-text>
-            <p>
-              Duis lobortis massa imperdiet quam. Donec vitae orci sed dolor rutrum auctor. Vestibulum facilisis, purus nec pulvinar iaculis, ligula mi congue nunc, vitae euismod ligula urna in dolor. Praesent congue erat at massa.
-            </p>
+        <!-- 後期 -->
+        <v-row no-gutters>
+          <v-col
+            v-for="(course, index) in latterCourses"
+            :key="index"
+            cols="12"
+            sm="4"
+            class="mb-4"
+          >
+            <v-card tile py-2 class="ma-3" :elevation="5" align="center">
+              <v-card-text>
+                <h3>{{ course.lecture_title}}</h3>
+                {{ course.lecture_season }}
+              </v-card-text>
 
-            <p>
-              Aenean posuere, tortor sed cursus feugiat, nunc augue blandit nunc, eu sollicitudin urna dolor sagittis lacus. Pellentesque egestas, neque sit amet convallis pulvinar, justo nulla eleifend augue, ac auctor orci leo non est. Etiam sit amet orci eget eros faucibus tincidunt. Donec sodales sagittis magna.
-            </p>
-
-            <p class="mb-0">
-              Ut leo. Suspendisse potenti. Duis vel nibh at velit scelerisque suscipit. Fusce pharetra convallis urna.
-            </p>
-          </v-card-text>
-        </v-card>
+              <div align="right">
+                <nuxt-link :to="'/earlyCourse/' + course._id" style="text-decoration: none">
+                  <v-btn class="ma-1" color="blue lighten-2 white--text font-weight-bold" large :elevation="5">詳細をみる</v-btn>
+                </nuxt-link>
+              </div>
+            </v-card>
+          </v-col>
+        </v-row>
       </v-tab-item>
     </v-tabs-items>
-  </v-card>
-
-
-
-
-
     </v-container>
   </v-app>
 </template>
@@ -80,7 +79,8 @@
   export default {
     data(){
       return {
-        courses: null,
+        earlyCourses: null,
+        latterCourses: null,
         dialog: false,
         tabs: null,
       }
@@ -96,11 +96,17 @@
       }
     },
     mounted() {
-      axios.get('http://localhost:8000/api/v1/courses')
+      axios.get('http://localhost:8000/api/v1/courses/early')
         .then(response => {
         console.log('Success to Fetch API')
-        this.courses = response.data
-      })
+        this.earlyCourses = response.data
+      }),
+      axios.get('http://localhost:8000/api/v1/courses/latter')
+        .then(response => {
+          console.log('Success to Fetch API')
+          this.latterCourses = response.data
+          console.log(response.data)
+        })
     }
   }
 </script>

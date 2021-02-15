@@ -21,11 +21,18 @@
     "_name": "_5a02dd10"
   },
   {
-    "name": "courses-id",
-    "path": "/courses/:id?",
-    "component": "/Users/kamimura/development/Node/Course_Registration_Gifu_Univ/myapp/frontend/pages/courses/_id.vue",
-    "chunkName": "pages/courses/_id",
-    "_name": "_4633d83d"
+    "name": "earlyCourse-id",
+    "path": "/earlyCourse/:id?",
+    "component": "/Users/kamimura/development/Node/Course_Registration_Gifu_Univ/myapp/frontend/pages/earlyCourse/_id.vue",
+    "chunkName": "pages/earlyCourse/_id",
+    "_name": "_922f6a3a"
+  },
+  {
+    "name": "latterCourse-id",
+    "path": "/latterCourse/:id?",
+    "component": "/Users/kamimura/development/Node/Course_Registration_Gifu_Univ/myapp/frontend/pages/latterCourse/_id.vue",
+    "chunkName": "pages/latterCourse/_id",
+    "_name": "_b4fecdc4"
   },
   {
     "name": "index",
