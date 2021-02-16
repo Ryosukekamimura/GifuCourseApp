@@ -44,10 +44,10 @@ exports.latter_course_details = function(req, res, next){
 
 // GET コメントのリストを表示する
 exports.comments_list = function(req, res, next){
+    console.log(req.params.id)
     Comment
-        .findById(req.params.id)
-        .exec(function(err, result){
-            if(err) { return next(err) }
+        .find({course_id: req.params.id}, function(err, result){
+            if (err) { return next(err) }
             console.log(result)
             res.json(result)
         })
@@ -57,10 +57,13 @@ exports.comments_list = function(req, res, next){
 exports.comments_craete_post = function(req, res, next){
     // Extract validation errors from a request
     const errors = validationResult(req)
+    console.log(req.body)
     // Create New Comments
     var comment = new Comment({
-        _id: req.body.id,
-        comment: req.body.comment
+        course_id: req.body.course_id,
+        comment: req.body.comment,
+        poster: req.body.poster,
+        serverTimeStamp: req.body.serverTimeStamp
     })
 
     if (!errors.isEmpty()){
@@ -78,29 +81,29 @@ exports.comments_craete_post = function(req, res, next){
 }
 
 
-exports.course_like_plus = function(req, res, next) {
-    Course.findByIdAndUpdate(req.params.id)
-        .exec(function(err, result){
-            if (err) { return next(err) }
-            console.log(result)
-            result.plus += 1
-            Course.findByIdAndUpdate(req.params.id, {$set: {plus: result.plus}}, {runValidator: true, new: true}, function(err, doc) {
-                if (err) { return next(err) }
-                res.json(doc)
-            })
-        })
-}
+// exports.course_like_plus = function(req, res, next) {
+//     Course.findByIdAndUpdate(req.params.id)
+//         .exec(function(err, result){
+//             if (err) { return next(err) }
+//             console.log(result)
+//             result.plus += 1
+//             Course.findByIdAndUpdate(req.params.id, {$set: {plus: result.plus}}, {runValidator: true, new: true}, function(err, doc) {
+//                 if (err) { return next(err) }
+//                 res.json(doc)
+//             })
+//         })
+// }
 
-exports.course_like_minus = function(req, res, next) {
-    Course.findByIdAndUpdate(req.params.id)
-        .exec(function(err, result){
-            if (err) { return next(err) }
-            console.log(result)
-            result.minus += 1
-            Course.findByIdAndUpdate(req.params.id, {$set: {minus: result.minus}}, {runValidator: true, new: true}, function(err, doc) {
-                if (err) { return next(err) }
-                res.json(doc)
-            })
-        })
-}
+// exports.course_like_minus = function(req, res, next) {
+//     Course.findByIdAndUpdate(req.params.id)
+//         .exec(function(err, result){
+//             if (err) { return next(err) }
+//             console.log(result)
+//             result.minus += 1
+//             Course.findByIdAndUpdate(req.params.id, {$set: {minus: result.minus}}, {runValidator: true, new: true}, function(err, doc) {
+//                 if (err) { return next(err) }
+//                 res.json(doc)
+//             })
+//         })
+// }
 
