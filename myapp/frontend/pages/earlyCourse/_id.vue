@@ -6,7 +6,7 @@
 
     <v-card color="blue lighten-4">
 
-      <div v-if="isFetched" align="center">
+      <div v-if="isCourseFetched" align="center">
         <div class="ma-4">
           <h3>講義名</h3>
           <h1>
@@ -57,16 +57,24 @@
       <div align="center">
         <p>個人を特定したコメント並びに、誹謗中傷は禁止させていただきます。</p>
         <p>感想を送信するには、ログインが必要となります。</p>
-        <v-btn depressed color="blue" @click="postComments('Nice Course!', course)">
+        <v-btn depressed color="blue" @click="postComments('Great Course!', course, 'Yuji')">
           送信
         </v-btn>
         <p>{{ checkLoginMessage }}</p>
       </div>
 
       <div>
-        <v-btn @click="fetchComments">
+        <v-btn @click="fetchComments(course._id)">
           コメントを確認する
         </v-btn>
+      </div>
+      <div v-if="isCommentFetched">
+        <li v-for="comment in commentData" :key="comment.comment">
+          {{ comment.comment }}
+        </li>
+      </div>
+      <div v-else>
+        <h3>コメントはありません。</h3>
       </div>
   </v-container>
 </template>
@@ -77,9 +85,10 @@
     data() {
       return {
         course: null,
-        isFetched: false,
+        isCourseFetched: false,
         checkLoginMessage: "",
-        comments: null,
+        commentData: null,
+        isCommentFetched: false,
       }
     },
     methods: {
@@ -96,10 +105,12 @@
         }
       },
       // コメントをpostする
-      postComments: function(comment ,course){
+      postComments: function(comment ,course, poster){
         axios.post("http://localhost:8000/api/v1/courses/create/comments", {
-          id: course._id,
-          comment: comment
+          course_id: course._id,
+          comment: comment,
+          poster: poster,
+          serverTimeStamp: Date.now(),
         }, {
           headers: {
             "Content-Type": "application/json",
@@ -114,8 +125,8 @@
         })
       },
       // コメントをFetchする
-      fetchComments: function(){
-        axios.get('http://localhost:8000/api/v1/courses/601d1dc76f30f41c7072c5ae/comments')
+      fetchComments: function(course_id){
+        axios.get('http://localhost:8000/api/v1/courses/' + course_id + '/comments')
         .then(res => {
           console.log('Fetch コメント')
           console.log(res.data)
@@ -129,8 +140,17 @@
         console.log('Success to Fetch API')
         console.log(res.data)
         this.course = res.data
-        this.isFetched = true
-      })
+        this.isCourseFetched = true
+      }),
+      axios.get('http://localhost:8000/api/v1/courses/' + this.$route.params.id + '/comments')
+        .then(res => {
+          console.log('Fetch コメント')
+          console.log(res.data)
+          this.commentData = res.data
+          console.log(this.commentData)
+          console.log(typeof(this.commentData))
+          this.isCommentFetched = true
+        })
     }
   }
 </script>
