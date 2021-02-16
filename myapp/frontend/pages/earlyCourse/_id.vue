@@ -40,9 +40,17 @@
       <v-spacer></v-spacer>
 
 
-      <div align="left">
+      <div align="center">
         <h3>コメント一覧</h3>
-        <h5 align="center">コメントはありません</h5>
+        <!-- コメント一覧を取得する -->
+        <div v-if="isCommentFetched">
+          <li v-for="comment in commentData" :key="comment.comment">
+            {{ comment.comment }}
+          </li>
+        </div>
+        <div v-else>
+          <h3>コメントはありません。</h3>
+        </div>
       </div>
       <v-spacer></v-spacer>
 
@@ -63,19 +71,7 @@
         <p>{{ checkLoginMessage }}</p>
       </div>
 
-      <div>
-        <v-btn @click="fetchComments(course._id)">
-          コメントを確認する
-        </v-btn>
-      </div>
-      <div v-if="isCommentFetched">
-        <li v-for="comment in commentData" :key="comment.comment">
-          {{ comment.comment }}
-        </li>
-      </div>
-      <div v-else>
-        <h3>コメントはありません。</h3>
-      </div>
+
   </v-container>
 </template>
 
@@ -124,14 +120,6 @@
           console.log(err)
         })
       },
-      // コメントをFetchする
-      fetchComments: function(course_id){
-        axios.get('http://localhost:8000/api/v1/courses/' + course_id + '/comments')
-        .then(res => {
-          console.log('Fetch コメント')
-          console.log(res.data)
-        })
-      }
     },
     mounted() {
       // HTTP request
