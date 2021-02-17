@@ -41,10 +41,10 @@
 
 
       <div align="center">
-        <h3>コメント一覧</h3>
+        <h3>みんなのコメント</h3>
         <!-- コメント一覧を取得する -->
         <div v-if="isCommentFetched">
-          <li v-for="comment in commentData" :key="comment.comment">
+          <li v-for="(comment, index) in commentData" :key="index">
             {{ comment.comment }}
           </li>
         </div>
@@ -55,6 +55,7 @@
       <v-spacer></v-spacer>
 
       <v-textarea
+        v-model = 'message'
         label="感想 [ex: 面白かった] [ex: 先生がずっと話している講義だった] [ex: 〇〇を改善してほしい]"
         auto-grow
         outlined
@@ -65,10 +66,11 @@
       <div align="center">
         <p>個人を特定したコメント並びに、誹謗中傷は禁止させていただきます。</p>
         <p>感想を送信するには、ログインが必要となります。</p>
-        <v-btn depressed color="blue" @click="postComments('Great Course!', course, 'Yuji')">
+        <v-btn depressed color="blue" @click="postComments(message, course, 'Yuji')">
           送信
         </v-btn>
         <p>{{ checkLoginMessage }}</p>
+        <h2>{{ statusMessage }}</h2>
       </div>
 
 
@@ -80,11 +82,13 @@
   export default {
     data() {
       return {
+        message: "",
         course: null,
         isCourseFetched: false,
         checkLoginMessage: "",
         commentData: null,
         isCommentFetched: false,
+        statusMessage: "",
       }
     },
     methods: {
@@ -102,23 +106,30 @@
       },
       // コメントをpostする
       postComments: function(comment ,course, poster){
-        axios.post("http://localhost:8000/api/v1/courses/create/comments", {
-          course_id: course._id,
-          comment: comment,
-          poster: poster,
-          serverTimeStamp: Date.now(),
-        }, {
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": "Bearer"
-          }
-        })
-        .then(() => {
-          console.log("Success To Send")
-        })
-        .catch(err => {
-          console.log(err)
-        })
+        if (comment == ""){
+          this.statusMessage = "コメントを入力してください🥺"
+          setTimeout(this.brankStatusMessage, 3000)
+        }else if (!this.$store.state.isLogin) {
+          this.statusMessage = "ログインしてください👀"
+          setTimeout(this.brankStatusMessage, 3000)
+        }else{
+          let poster = this.$store.state.displayName
+          axios.post("http://localhost:8000/api/v1/courses/create/comments", {
+            course_id: course._id,
+            comment: comment,
+            poster: poster,
+            serverTimeStamp: Date.now(),
+          })
+          this.statusMessage = "Thank you! コメントを投稿できました！🎉"
+          // statusMessageを空白にする
+          setTimeout(this.brankStatusMessage, 3000)
+          // 入力コメントをnullにする
+          this.message = ""
+        }
+      },
+      //statusMessageを空白にする
+      brankStatusMessage: function(){
+        this.statusMessage = ""
       },
     },
     mounted() {
@@ -136,7 +147,6 @@
           console.log(res.data)
           this.commentData = res.data
           console.log(this.commentData)
-          console.log(typeof(this.commentData))
           this.isCommentFetched = true
         })
     }
