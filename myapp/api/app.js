@@ -5,6 +5,9 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mongoose = require('mongoose')
 var cors = require('cors')
+var compression = require('compression')
+var helmet = require('helmet')
+
 // routers
 var indexRouter = require('./routes/index');
 var coursesRouter = require('./routes/courses');
@@ -23,6 +26,8 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
 // express use
+app.use(helmet())
+app.use(compression())
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
