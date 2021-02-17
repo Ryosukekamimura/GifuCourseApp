@@ -1,9 +1,17 @@
 <template>
   <v-container>
     <v-col>
-      <h1>
-        This IS RANKING PAGE!
-      </h1>
+      <h3>
+        ただ今作成中です。
+      </h3>
+      <br>
+      <v-divider></v-divider>
+      <h3>
+        エンジニアとして助けていただける助っ人を探しています。<br>
+        お問い合わせフォームからご連絡いただければ、幸いです。<br>
+        1名様限定<br>
+      </h3>
+      <v-divider></v-divider>
     </v-col>
   </v-container>
 </template>

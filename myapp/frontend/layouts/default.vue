@@ -55,6 +55,10 @@
     >
       <span>&copy; {{ new Date().getFullYear() }}</span>
       <span>岐阜大学　シラバスより</span>
+      <v-spacer></v-spacer>
+      <v-btn class="ma-2" href="https://forms.gle/NqocgywkA4oiLuBL7" plain>
+        🛎お問い合わせ・削除依頼はこちらへ
+      </v-btn>
     </v-footer>
   </v-app>
 </template>
