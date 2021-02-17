@@ -66,7 +66,7 @@
       <div align="center">
         <p>個人を特定したコメント並びに、誹謗中傷は禁止させていただきます。</p>
         <p>感想を送信するには、ログインが必要となります。</p>
-        <v-btn depressed color="blue" @click="postComments(message, course, 'Yuji')">
+        <v-btn depressed color="blue" @click="postComments(message, course)">
           送信
         </v-btn>
         <p>{{ checkLoginMessage }}</p>
@@ -105,7 +105,7 @@
         }
       },
       // コメントをpostする
-      postComments: function(comment ,course, poster){
+      postComments: function(comment ,course){
         if (comment == ""){
           this.statusMessage = "コメントを入力してください🥺"
           setTimeout(this.brankStatusMessage, 3000)
