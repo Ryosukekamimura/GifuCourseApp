@@ -1,12 +1,22 @@
+# ROOT directory
 .DS_Store
+
+# api and frontend folder
+myapp/.idea
+myapp/.vscode
+
+# frountend folder
+myapp/frontend/.nuxt/
+myapp/frontend/.editorconfig
 myapp/frontend/node_modules
 
+# api folder
+myapp/api
+
 # python scripts ignore files
-scirpts/.idea
+scripts/.idea
 scripts/__pycache__
 scripts/courses
 scripts/outputFile2.txt
 scripts/MongoDBKey.py
 
-# .nuxt
-myapp/frontend/.nuxt/
