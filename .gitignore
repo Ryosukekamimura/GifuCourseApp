@@ -1,6 +1,13 @@
-scripts/courses
-scripts/__pycache__
-scripts/outputFile2.txt
-scripts/MongoDBKey.py
+
 .DS_Store
 myapp/frontend/node_modules
+
+# python scripts ignore files
+scirpts/.idea
+scripts/__pycache__
+scripts/courses
+scripts/outputFile2.txt
+scripts/MongoDBKey.py
+
+# .nuxt
+myapp/frontend/.nuxt/
