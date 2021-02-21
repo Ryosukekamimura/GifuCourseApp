@@ -15,7 +15,7 @@ myapp/api
 
 
 # python scripts ignore files
-scirpts
+scirpts/
 scripts/.idea
 scripts/__pycache__
 scripts/courses
