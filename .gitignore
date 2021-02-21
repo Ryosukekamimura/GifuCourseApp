@@ -13,7 +13,9 @@ myapp/frontend/node_modules
 # api folder
 myapp/api
 
+
 # python scripts ignore files
+scirpts
 scripts/.idea
 scripts/__pycache__
 scripts/courses
