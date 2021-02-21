@@ -5,3 +5,6 @@ scripts/outputFile2.txt
 scripts/MongoDBKey.py
 .DS_Store
 myapp/frontend/node_modules
+
+# .nuxt
+myapp/frontend/.nuxt/
